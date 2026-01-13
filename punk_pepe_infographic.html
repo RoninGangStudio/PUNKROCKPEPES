@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punk Rock Pepe: The Anti-Infographic</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rubik+Glitch&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-yellow: #EAFF00;
+            --neon-pink: #FF00FF;
+            --neon-blue: #00FFFF;
+            --void-black: #050505;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            background-image: radial-gradient(#000000 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Space Mono', monospace;
+            color: var(--void-black);
+        }
+
+        .font-glitch {
+            font-family: 'Rubik Glitch', display;
+        }
+
+        .neo-box {
+            background: white;
+            border: 3px solid black;
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+            transition: all 0.2s ease;
+        }
+
+        .neo-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
+        }
+
+        .neo-btn {
+            background: black;
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 4px 4px 0px 0px var(--neon-pink);
+            transition: transform 0.1s;
+            cursor: pointer;
+            padding: 1rem 2rem;
+        }
+
+        .neo-btn:hover {
+            background: var(--neon-yellow);
+            color: black;
+        }
+
+        .neo-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px var(--neon-pink);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 400px;
+            background: white;
+            border: 2px solid black;
+            padding: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        .highlight-yellow { 
+            background-color: var(--neon-yellow); 
+            padding: 0 4px;
+        }
+        
+        .highlight-pink { 
+            background-color: var(--neon-pink); 
+            color: white;
+            padding: 0 4px;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        
+        .shaking {
+            animation: shake 0.5s;
+        }
+
+        .flash-yellow {
+            animation: flash 0.2s;
+        }
+
+        @keyframes flash {
+            0%, 100% { background-color: white; }
+            50% { background-color: var(--neon-yellow); }
+        }
+
+        /* Utility Classes */
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+        .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .px-8 { padding-left: 2rem; padding-right: 2rem; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .pl-4 { padding-left: 1rem; }
+        .pl-8 { padding-left: 2rem; }
+        .pb-2 { padding-bottom: 0.5rem; }
+        .pb-8 { padding-bottom: 2rem; }
+        .pt-8 { padding-top: 2rem; }
+        .pr-2 { padding-right: 0.5rem; }
+        
+        .m-auto { margin: auto; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-20 { margin-bottom: 5rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        
+        .max-w-2xl { max-width: 42rem; }
+        .max-w-3xl { max-width: 48rem; }
+        .max-w-7xl { max-width: 80rem; }
+        .min-h-\[120px\] { min-height: 120px; }
+        .w-full { width: 100%; }
+        .w-8 { width: 2rem; }
+        .w-64 { width: 16rem; }
+        .h-2 { height: 0.5rem; }
+        .h-8 { height: 2rem; }
+        .h-64 { height: 16rem; }
+        
+        .space-y-0 > * + * { margin-top: 0; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-12 > * + * { margin-top: 3rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-base { font-size: 1rem; line-height: 1.5rem; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-6xl { font-size: 3.75rem; line-height: 1; }
+        
+        .font-bold { font-weight: 700; }
+        .font-normal { font-weight: 400; }
+        .font-mono { font-family: 'Space Mono', monospace; }
+        
+        .text-white { color: #ffffff; }
+        .text-black { color: #000000; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-700 { color: #374151; }
+        .text-red-500 { color: #ef4444; }
+        
+        .bg-white { background-color: #ffffff; }
+        .bg-black { background-color: #000000; }
+        .bg-gray-100 { background-color: #f3f4f6; }
+        .bg-gray-200 { background-color: #e5e7eb; }
+        
+        .border { border-width: 1px; }
+        .border-2 { border-width: 2px; }
+        .border-4 { border-width: 4px; }
+        .border-black { border-color: #000000; }
+        .border-white { border-color: #ffffff; }
+        .border-l-4 { border-left-width: 4px; }
+        .border-b-2 { border-bottom-width: 2px; }
+        .border-t-2 { border-top-width: 2px; }
+        
+        .rounded-full { border-radius: 9999px; }
+        
+        .inline-block { display: inline-block; }
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .hidden { display: none; }
+        
+        .items-start { align-items: flex-start; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .flex-col { flex-direction: column; }
+        
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .top-0 { top: 0; }
+        .left-0 { left: 0; }
+        .-left-\[18px\] { left: -18px; }
+        .-right-20 { right: -5rem; }
+        .-top-20 { top: -5rem; }
+        
+        .z-10 { z-index: 10; }
+        
+        .transform { transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1); }
+        .rotate-1 { transform: rotate(1deg); }
+        .-rotate-1 { transform: rotate(-1deg); }
+        
+        .overflow-hidden { overflow: hidden; }
+        .pointer-events-none { pointer-events: none; }
+        
+        .opacity-20 { opacity: 0.2; }
+        .opacity-90 { opacity: 0.9; }
+        
+        .blur-3xl { filter: blur(64px); }
+        
+        .uppercase { text-transform: uppercase; }
+        .underline { text-decoration: underline; }
+        .decoration-wavy { text-decoration-style: wavy; }
+        .decoration-double { text-decoration-style: double; }
+        .decoration-gray-400 { text-decoration-color: #9ca3af; }
+        
+        .leading-none { line-height: 1; }
+        .leading-tight { line-height: 1.25; }
+        
+        .text-center { text-align: center; }
+        
+        @media (min-width: 768px) {
+            .md\:p-8 { padding: 2rem; }
+            .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+            .md\:text-8xl { font-size: 6rem; line-height: 1; }
+            .md\:w-1\/4 { width: 25%; }
+            .md\:w-3\/4 { width: 75%; }
+            .md\:w-auto { width: auto; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            .md\:col-span-12 { grid-column: span 12 / span 12; }
+            .md\:flex-row { flex-direction: row; }
+        }
+        
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-12 mb-20">
+
+        <header class="neo-box p-8 bg-black text-white relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="inline-block bg-white text-black px-2 py-1 mb-2 font-bold uppercase border-2 border-white transform -rotate-1">Source Material: Punk Rock Pepe Thesis</div>
+                <h1 class="text-6xl md:text-8xl font-glitch leading-none text-white mb-4">PUNK ROCK<br><span style="color: #EAFF00;">PEPE</span></h1>
+                <p class="text-xl md:text-2xl font-bold max-w-2xl border-l-4 pl-4" style="border-color: #FF00FF;">
+                    Fair Launch. Real Chaos. Nothing Else.<br>
+                    <span class="text-gray-400 text-base font-normal">A data-driven breakdown of a cultural experiment on Solana.</span>
+                </p>
+            </div>
+            <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none" style="background-color: #FF00FF;"></div>
+        </header>
+
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform rotate-1">01. The Manifesto</h2>
+                <p class="mt-4 text-lg bg-white inline-block p-2 border-2 border-black">
+                    Punk Rock Pepe isn't trying to change the world. It's laughing at it while it burns. Before diving into the data, we must understand the ideological gap between the "Corporate" crypto world and the "Punk" reality.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="neo-box p-6 bg-gray-100 opacity-90">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-500 uppercase decoration-wavy underline decoration-gray-400">The Old Way</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-red-500 font-bold mr-2 text-xl">✗</span>
+                            <div>
+                                <strong class="block text-gray-700">Polished Lies</strong>
+                                <span class="text-sm text-gray-500">Corporate decks and fake roadmaps.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 font-bold mr-2 text-xl">✗</span>
+                            <div>
+                                <strong class="block text-gray-700">Insider Deals</strong>
+                                <span class="text-sm text-gray-500">VCs and KOLs dumping on you.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 font-bold mr-2 text-xl">✗</span>
+                            <div>
+                                <strong class="block text-gray-700">"Future Utility"</strong>
+                                <span class="text-sm text-gray-500">Promises that never materialize.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="neo-box p-6 border-4 border-black" style="background-color: #EAFF00;">
+                    <h3 class="text-2xl font-bold mb-4 text-black uppercase decoration-double underline">The Punk Way</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-black font-bold mr-2 text-xl">✓</span>
+                            <div>
+                                <strong class="block text-black">Fair Launch</strong>
+                                <span class="text-sm font-bold">No presale. No whitelist.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-black font-bold mr-2 text-xl">✓</span>
+                            <div>
+                                <strong class="block text-black">Fixed Supply</strong>
+                                <span class="text-sm font-bold">Liquidity burned forever.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-black font-bold mr-2 text-xl">✓</span>
+                            <div>
+                                <strong class="block text-black">Cultural Utility</strong>
+                                <span class="text-sm font-bold">Memes, humor, and chaos.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform -rotate-1">02. The Engine</h2>
+                <p class="mt-4 text-lg bg-white inline-block p-2 border-2 border-black max-w-3xl">
+                    Community energy drives the project. Static text dies; dynamic chaos survives. This generator represents the "Noise" required to capture attention in the marketplace.
+                </p>
+            </div>
+
+            <div class="neo-box p-8 bg-black relative overflow-hidden text-center">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-500 via-yellow-300 to-cyan-400" style="background: linear-gradient(to right, #FF00FF, #EAFF00, #00FFFF);"></div>
+                
+                <h3 class="text-2xl font-bold text-white mb-6 uppercase">Magic Chaos Generator</h3>
+                
+                <div id="chaos-display" class="bg-white p-6 mb-8 min-h-[120px] flex items-center justify-center" style="border: 4px solid #FF00FF; box-shadow: inset 0px 0px 20px rgba(0,0,0,0.2);">
+                    <p class="text-xl md:text-2xl font-bold font-mono text-black leading-tight">"Click the button to ignite the chaos."</p>
+                </div>
+
+                <button onclick="generateChaos()" id="gen-btn" class="neo-btn text-xl w-full md:w-auto">
+                    Generate Raid Copy
+                </button>
+            </div>
+        </section>
+
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform rotate-1">03. The Data</h2>
+                <p class="mt-4 text-lg bg-white inline-block p-2 border-2 border-black max-w-3xl">
+                    We don't trust words; we trust the blockchain. Below is the quantitative proof of the "Fair Launch" thesis and the projected market behavior compared to traditional scams.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="neo-box p-6">
+                    <div class="mb-4 border-b-2 border-black pb-2">
+                        <h3 class="text-xl font-bold uppercase">Token Allocation</h3>
+                        <p class="text-xs text-gray-500">Source: On-chain Contract</p>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="tokenomicsChart"></canvas>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <p class="text-sm font-bold inline-block px-2 border border-black" style="background-color: #EAFF00;">100% Community Owned</p>
+                        <p class="text-xs mt-1 text-gray-500">0% Team · 0% VCs · 0% Marketing</p>
+                    </div>
+                </div>
+
+                <div class="neo-box p-6">
+                    <div class="mb-4 border-b-2 border-black pb-2">
+                        <h3 class="text-xl font-bold uppercase">Volatility Profile</h3>
+                        <p class="text-xs text-gray-500">Punk Pepe vs. Standard Rug</p>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="volatilityChart"></canvas>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <p class="text-sm font-bold bg-black text-white inline-block px-2">High Volatility = High Life</p>
+                        <p class="text-xs mt-1 text-gray-500">Survivability requires chaos.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform -rotate-1">04. The Process</h2>
+                <p class="mt-4 text-lg bg-white inline-block p-2 border-2 border-black max-w-3xl">
+                    An "Honest Roadmap" does not promise features that don't exist. It outlines the phases of survival and cultural dominance.
+                </p>
+            </div>
+
+            <div class="neo-box p-8 bg-white">
+                <div class="space-y-0">
+                    
+                    <div class="flex flex-col md:flex-row gap-6 pb-8 border-l-4 border-black pl-8 relative">
+                        <div class="absolute -left-[18px] top-0 w-8 h-8 bg-black rounded-full text-white flex items-center justify-center font-bold">1</div>
+                        <div class="md:w-1/4">
+                            <h3 class="text-2xl font-bold uppercase highlight-yellow inline-block px-1">Phase 1: Launch</h3>
+                            <p class="text-sm font-bold text-gray-500 mt-1">Status: Active</p>
+                        </div>
+                        <div class="md:w-3/4">
+                            <p class="mb-2 font-bold">Token. Memes. Telegram. X.</p>
+                            <p class="text-sm text-gray-600">Fair launch on pump.fun. The community pushes the curve. If it graduates, it moves to Raydium. Liquidity is burned automatically.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-6 pb-8 border-l-4 border-black pl-8 relative">
+                        <div class="absolute -left-[18px] top-0 w-8 h-8 bg-white border-4 border-black rounded-full flex items-center justify-center font-bold">2</div>
+                        <div class="md:w-1/4">
+                            <h3 class="text-2xl font-bold uppercase highlight-pink inline-block px-1">Phase 2: Chaos</h3>
+                            <p class="text-sm font-bold text-gray-500 mt-1">Status: Pending</p>
+                        </div>
+                        <div class="md:w-3/4">
+                            <p class="mb-2 font-bold">Raids. Shitposts. Satire.</p>
+                            <p class="text-sm text-gray-600">Generating noise to attract attention. Attention moves markets. This phase focuses on acid humor and satire news.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-6 border-l-4 border-black pl-8 relative">
+                        <div class="absolute -left-[18px] top-0 w-8 h-8 bg-white border-4 border-black rounded-full flex items-center justify-center font-bold">3</div>
+                        <div class="md:w-1/4">
+                            <h3 class="text-2xl font-bold uppercase bg-gray-200 inline-block px-1">Phase 3: Survival</h3>
+                            <p class="text-sm font-bold text-gray-500 mt-1">Status: Unknown</p>
+                        </div>
+                        <div class="md:w-3/4">
+                            <p class="mb-2 font-bold">Adaptation or Death.</p>
+                            <p class="text-sm text-gray-600">If the project lives, features are added. If it dies, it was an honest experiment. Nothing is promised before it exists.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-12">
+                <div class="neo-box p-6 text-white" style="background-color: #FF00FF;">
+                    <h2 class="text-3xl font-bold uppercase mb-4 text-black bg-white inline-block px-2">Mosh Pit Rules</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-black p-4 border-2 border-white">
+                            <span class="text-2xl">🚫</span>
+                            <h4 class="font-bold mt-2" style="color: #EAFF00;">NO SCAMS</h4>
+                        </div>
+                        <div class="bg-black p-4 border-2 border-white">
+                            <span class="text-2xl">🚫</span>
+                            <h4 class="font-bold mt-2" style="color: #EAFF00;">NO RACISM</h4>
+                        </div>
+                        <div class="bg-black p-4 border-2 border-white">
+                            <span class="text-2xl">🚫</span>
+                            <h4 class="font-bold mt-2" style="color: #EAFF00;">NO CRYING</h4>
+                        </div>
+                        <div class="bg-white p-4 border-2 border-black text-black">
+                            <span class="text-2xl">⚡</span>
+                            <h4 class="font-bold mt-2">CHAOS ALLOWED</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-xs font-mono text-gray-500 pt-8 border-t-2 border-black">
+            <p class="uppercase font-bold">Punk Rock Pepe Infographic © 2026</p>
+            <p>Generated based on source thesis. Not Financial Advice.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const chaosPhrases = [
+            "Forget the whitepaper. Read the room.",
+            "No VCs to dump on you. Just chaos.",
+            "Liquidity is burnt. So are the bridges.",
+            "Punk Rock Pepe: Laughing while it burns.",
+            "Fair launch means fair chance.",
+            "We don't build roadmaps. We build noise.",
+            "Fade at your own risk.",
+            "Enter the mosh pit.",
+            "Your bags are your problem, not ours.",
+            "No utility except vibes.",
+            "Community > Corporate.",
+            "Burn the supply. Burn the narrative.",
+            "We're not here to pump. We're here to laugh.",
+            "This is your warning and your invitation.",
+            "Tokenomics: 100% community. 0% bullshit.",
+            "No team tokens. No regrets.",
+            "The only roadmap is chaos.",
+            "Marketing budget: Zero. Attitude: Maximum.",
+            "Exit liquidity? We burned the exit.",
+            "Presale is a scam. We skip the scam.",
+            "No promises. Just Pepe and punk rock.",
+            "DYOR or don't. We don't care.",
+            "Rug immunity: Liquidity deleted.",
+            "Your lambo is parked in your imagination.",
+            "Hype dies. Culture survives.",
+            "No whitelist. No special treatment. Just vibes.",
+            "Pump.fun graduate or die trying.",
+            "Fair launch or fake launch. Pick one.",
+            "We're allergic to VCs and venture capital.",
+            "Solana speed. Punk attitude. Zero compromise."
+        ];
+
+        function generateChaos() {
+            const btn = document.getElementById('gen-btn');
+            const display = document.getElementById('chaos-display');
+            const textElement = display.querySelector('p');
+
+            btn.classList.add('shaking');
+            setTimeout(() => btn.classList.remove('shaking'), 500);
+
+            const randomIndex = Math.floor(Math.random() * chaosPhrases.length);
+            textElement.innerText = chaosPhrases[randomIndex];
+            
+            display.classList.add('flash-yellow');
+            setTimeout(() => display.classList.remove('flash-yellow'), 200);
+        }
+
+        function wrapLabel(label) {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length < maxLength) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const commonTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            },
+            backgroundColor: '#000000',
+            titleFont: { family: 'Space Mono', size: 14 },
+            bodyFont: { family: 'Space Mono', size: 12 },
+            padding: 10,
+            cornerRadius: 0,
+            displayColors: false
+        };
+
+        const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
+        const tokenLabels = ['Community', 'Team', 'VCs', 'Marketing'];
+        const processedTokenLabels = tokenLabels.map(wrapLabel);
+
+        new Chart(ctxToken, {
+            type: 'doughnut',
+            data: {
+                labels: processedTokenLabels,
+                datasets: [{
+                    data: [100, 0, 0, 0],
+                    backgroundColor: [
+                        '#EAFF00',
+                        '#000000', 
+                        '#808080', 
+                        '#C0C0C0'
+                    ],
+                    borderColor: '#000000',
+                    borderWidth: 3,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'Space Mono' }, color: '#000' }
+                    },
+                    tooltip: commonTooltipOptions
+                }
+            }
+        });
+
+        const ctxVol = document.getElementById('volatilityChart').getContext('2d');
+        const volLabels = ['Launch', 'Day 1', 'Day 3', 'Week 1', 'Week 2', 'Month 1'];
+        const processedVolLabels = volLabels.map(wrapLabel);
+
+        new Chart(ctxVol, {
+            type: 'line',
+            data: {
+                labels: processedVolLabels,
+                datasets: [
+                    {
+                        label: 'Standard Scam',
+                        data: [10, 80, 95, 10, 0, 0],
+                        borderColor: '#9ca3af',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Punk Rock Pepe',
+                        data: [10, 40, 25, 65, 45, 90],
+                        borderColor: '#FF00FF',
+                        backgroundColor: 'rgba(255, 0, 255, 0.1)',
+                        borderWidth: 3,
+                        tension: 0,
+                        pointBackgroundColor: '#000000',
+                        pointBorderColor: '#000000',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Space Mono' }, color: '#000' }
+                    },
+                    y: {
+                        display: false,
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'Space Mono' }, color: '#000' }
+                    },
+                    tooltip: commonTooltipOptions
+                }
+            }
+        });
+    </script>
+</body>
+</html>
