@@ -253,16 +253,13 @@
         
         /* Logo styling */
         .punk-logo {
-            max-width: 340px; /* ANTES: 250px. AHORA: 340px (35% más grande) */
+            max-width: 340px;
             height: auto;
             border: 4px solid white;
-            box-shadow: 8px 8px 0px 0px #FF00FF;
-            /* ANTES: rotate(3deg); */
-            /* AHORA: Agregamos translateX(-50%) para moverlo 50% a la izquierda */
-            transform: translateX(-30%) rotate(3deg);
+            box-shadow: 12px 12px 0px 0px #FF00FF;
+            transform: translateX(-10%) rotate(3deg);
             background-color: black;
         }
-        
 
         @media (min-width: 768px) {
             .md\:p-8 { padding: 2rem; }
@@ -284,13 +281,27 @@
         @media (min-width: 1024px) {
             .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         }
+
+        /* --- ARREGLO PARA MÓVILES --- */
+        @media (max-width: 768px) {
+            .punk-logo {
+                max-width: 240px !important; 
+                transform: rotate(3deg) !important;
+                box-shadow: 8px 8px 0px 0px #FF00FF !important;
+                margin-top: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            h1 {
+                font-size: 3.5rem !important;
+            }
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto space-y-12 mb-20">
 
-        <header class="neo-box p-8 bg-black text-white relative overflow-hidden">
+        <header class="neo-box p-8 bg-black text-white relative overflow-hidden pb-12">
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                 
                 <div class="w-full md:w-2/3">
@@ -409,9 +420,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <div class="neo-box p-6">
-                    <div class="mb-4 border-b-2 border-black pb-2">
-                        <div class="mb-4 border-b-2 border-black pb-2 text-center">
+                    <div class="mb-4 border-b-2 border-black pb-2 text-center">
                         <h3 class="text-xl font-bold uppercase">Token Allocation</h3>
+                        <p class="text-xs text-gray-500">Source: On-chain Contract</p>
                     </div>
                     
                     <div class="chart-container">
@@ -425,8 +436,8 @@
                 </div>
 
                 <div class="neo-box p-6">
-                   <div class="mb-4 border-b-2 border-black pb-2">
-                       <h3 class="text-xl font-bold uppercase">Volatility Profile</h3>
+                    <div class="mb-4 border-b-2 border-black pb-2 text-center">
+                        <h3 class="text-xl font-bold uppercase">Volatility Profile</h3>
                         <p class="text-xs text-gray-500">Punk Pepes vs. Standard Rug</p>
                     </div>
 
