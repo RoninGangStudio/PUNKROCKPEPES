@@ -253,13 +253,16 @@
         
         /* Logo styling */
         .punk-logo {
-            max-width: 250px;
+            max-width: 340px; /* ANTES: 250px. AHORA: 340px (35% más grande) */
             height: auto;
             border: 4px solid white;
             box-shadow: 8px 8px 0px 0px #FF00FF;
-            transform: rotate(3deg);
+            /* ANTES: rotate(3deg); */
+            /* AHORA: Agregamos translateX(-50%) para moverlo 50% a la izquierda */
+            transform: translateX(-50%) rotate(3deg);
             background-color: black;
         }
+        
 
         @media (min-width: 768px) {
             .md\:p-8 { padding: 2rem; }
