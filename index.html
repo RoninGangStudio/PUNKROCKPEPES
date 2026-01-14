@@ -746,4 +746,298 @@
             "No VCs to dump on you. Just chaos.",
             "Liquidity is burnt. So are the bridges.",
             "Punk Rock Pepes: Laughing while it burns.",
-            "Fair launch means
+            "Fair launch means fair chance.",
+            "We don't build roadmaps. We build noise.",
+            "Fade at your own risk.",
+            "Enter the mosh pit.",
+            "Your bags are your problem, not ours.",
+            "No utility except vibes.",
+            "Community > Corporate.",
+            "Burn the supply. Burn the narrative.",
+            "We're not here to pump. We're here to laugh.",
+            "This is your warning and your invitation.",
+            "Tokenomics: 100% community. 0% bullshit.",
+            "No team tokens. No regrets.",
+            "The only roadmap is chaos.",
+            "Marketing budget: Zero. Attitude: Maximum.",
+            "Exit liquidity? We burned the exit.",
+            "Presale is a scam. We skip the scam.",
+            "No promises. Just Pepes and punk rock.",
+            "DYOR or don't. We don't care.",
+            "Rug immunity: Liquidity deleted.",
+            "Your lambo is parked in your imagination.",
+            "Hype dies. Culture survives.",
+            "No whitelist. No special treatment. Just vibes.",
+            "Pump.fun graduate or die trying.",
+            "Fair launch or fake launch. Pick one.",
+            "We're allergic to VCs and venture capital.",
+            "Solana speed. Punk attitude. Zero compromise."
+        ];
+
+        function generateChaos() {
+            const btn = document.getElementById('gen-btn');
+            const display = document.getElementById('chaos-display');
+            const textElement = display.querySelector('p');
+
+            btn.classList.add('shaking');
+            setTimeout(() => btn.classList.remove('shaking'), 500);
+
+            const randomIndex = Math.floor(Math.random() * chaosPhrases.length);
+            textElement.innerText = chaosPhrases[randomIndex];
+            
+            display.classList.add('flash-yellow');
+            setTimeout(() => display.classList.remove('flash-yellow'), 200);
+        }
+
+        // --- PEPE TV NEWS LOGIC ---
+
+        const newsTemplates = [
+            "BREAKING: {topic} declared illegal by the Galactic Federation of Pepes.",
+            "Scientists confirm {topic} causes massive brain rot in boomers.",
+            "Why {topic} is actually a sophisticated rug pull designed by aliens.",
+            "Local Pepe sells kidney to buy more {topic}, regrets nothing.",
+            "Financial Advisors hate him! How to lose money fast with {topic}.",
+            "{topic}: Bullish signal or sign of mental illness? Experts debate.",
+            "Government admits {topic} was a psyop to distract us from the price of bananas.",
+            "New study shows 99% of exposure to {topic} leads to pixelated hallucinations.",
+            "If you don't like {topic}, you are probably a corporate spy.",
+            "{topic} crashes the simulation; developers panic selling reality."
+        ];
+
+        // --- ARRAY DE IMÁGENES ---
+        // INSTRUCCIÓN: Copia tus URLs RAW de GitHub y pégalas dentro de las comillas.
+        const newsImages = [
+            "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/imagen1.jpg", 
+            "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/imagen2.jpg", 
+            "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/imagen3.jpg"
+            // Agrega más separadas por coma
+        ];
+
+        let currentHeadline = "";
+
+        function generateHeadline() {
+            const input = document.getElementById('news-input').value.trim();
+            const display = document.getElementById('news-display');
+            const imgBtn = document.getElementById('btn-img-gen');
+            const imageArea = document.getElementById('image-result-area');
+
+            // Fallback si no escriben nada
+            const topic = input || "YOUR WALLET"; 
+
+            // Seleccionar template random
+            const randomIndex = Math.floor(Math.random() * newsTemplates.length);
+            const template = newsTemplates[randomIndex];
+            
+            // Reemplazar {topic} con el input y colorearlo
+            currentHeadline = template.replace("{topic}", `<span class="text-[#FF00FF]">${topic}</span>`);
+
+            // Animación de texto
+            display.innerHTML = "PROCESSING...";
+            display.classList.add('shaking');
+            
+            setTimeout(() => {
+                display.classList.remove('shaking');
+                display.innerHTML = currentHeadline;
+                
+                // Activar el botón de imagen
+                imgBtn.disabled = false;
+                imgBtn.classList.remove('bg-gray-800', 'text-gray-500', 'cursor-not-allowed');
+                // Al activarlo, le damos los estilos de hover y color
+                imgBtn.classList.remove('opacity-50'); 
+                
+                // Ocultar imagen anterior si existe
+                imageArea.classList.add('hidden');
+            }, 300);
+        }
+
+        function generateNewsImage() {
+            const imageArea = document.getElementById('image-result-area');
+            const loader = document.getElementById('loading-spinner');
+            const visual = document.getElementById('generated-visual');
+            const memeText = document.getElementById('meme-final-text');
+            const shareControls = document.getElementById('share-controls');
+            
+            // Ocultar controles previos
+            shareControls.classList.add('hidden');
+            shareControls.classList.remove('flex');
+
+            imageArea.classList.remove('hidden');
+            loader.classList.remove('hidden');
+            visual.classList.add('hidden');
+            
+            imageArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                visual.classList.remove('hidden');
+                
+                // Seleccionar imagen aleatoria
+                const randomImg = newsImages[Math.floor(Math.random() * newsImages.length)];
+                
+                // Aplicar imagen de fondo
+                visual.style.backgroundImage = `url('${randomImg}')`;
+                visual.style.backgroundSize = 'cover';
+                visual.style.backgroundPosition = 'center';
+
+                // Inyectar el titular
+                memeText.innerHTML = currentHeadline; 
+
+                // Efecto flash
+                imageArea.classList.add('flash-yellow');
+                setTimeout(() => imageArea.classList.remove('flash-yellow'), 200);
+
+                // Mostrar botón de descarga
+                shareControls.classList.remove('hidden');
+                shareControls.classList.add('flex');
+                
+            }, 1000);
+        }
+
+        // --- FUNCIÓN PARA DESCARGAR LA IMAGEN ---
+        function downloadMeme() {
+            const element = document.getElementById('generated-visual');
+            
+            html2canvas(element, {
+                useCORS: true, // Importante para imágenes externas (GitHub)
+                scale: 2 // Alta calidad
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'punk-pepe-news.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        // --- CHARTS LOGIC ---
+
+        function wrapLabel(label) {
+            const maxLength = 16;
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length < maxLength) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const commonTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            },
+            backgroundColor: '#000000',
+            titleFont: { family: 'Space Mono', size: 14 },
+            bodyFont: { family: 'Space Mono', size: 12 },
+            padding: 10,
+            cornerRadius: 0,
+            displayColors: false
+        };
+
+        const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
+        const tokenLabels = ['Community', 'Team', 'VCs', 'Marketing'];
+        const processedTokenLabels = tokenLabels.map(wrapLabel);
+
+        new Chart(ctxToken, {
+            type: 'doughnut',
+            data: {
+                labels: processedTokenLabels,
+                datasets: [{
+                    data: [100, 0, 0, 0],
+                    backgroundColor: [
+                        '#EAFF00',
+                        '#000000', 
+                        '#808080', 
+                        '#C0C0C0'
+                    ],
+                    borderColor: '#000000',
+                    borderWidth: 3,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'Space Mono' }, color: '#000' }
+                    },
+                    tooltip: commonTooltipOptions
+                }
+            }
+        });
+
+        const ctxVol = document.getElementById('volatilityChart').getContext('2d');
+        const volLabels = ['Launch', 'Day 1', 'Day 3', 'Week 1', 'Week 2', 'Month 1'];
+        const processedVolLabels = volLabels.map(wrapLabel);
+
+        new Chart(ctxVol, {
+            type: 'line',
+            data: {
+                labels: processedVolLabels,
+                datasets: [
+                    {
+                        label: 'Standard Scam',
+                        data: [10, 80, 95, 10, 0, 0],
+                        borderColor: '#9ca3af',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Punk Rock Pepes',
+                        data: [10, 40, 25, 65, 45, 90],
+                        borderColor: '#FF00FF',
+                        backgroundColor: 'rgba(255, 0, 255, 0.1)',
+                        borderWidth: 3,
+                        tension: 0,
+                        pointBackgroundColor: '#000000',
+                        pointBorderColor: '#000000',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Space Mono' }, color: '#000' }
+                    },
+                    y: {
+                        display: false,
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: 'Space Mono' }, color: '#000' }
+                    },
+                    tooltip: commonTooltipOptions
+                }
+            }
+        });
+    </script>
+</body>
+</html>
