@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punk Rock Pepe: The Anti-Infographic</title>
+    <title>Punk Rock Pepes: The Anti-Infographic</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rubik+Glitch&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     
@@ -211,6 +211,8 @@
         .items-start { align-items: flex-start; }
         .items-center { align-items: center; }
         .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-end { justify-content: flex-end; }
         .flex-col { flex-direction: column; }
         
         .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
@@ -228,6 +230,7 @@
         .transform { transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1); }
         .rotate-1 { transform: rotate(1deg); }
         .-rotate-1 { transform: rotate(-1deg); }
+        .rotate-3 { transform: rotate(3deg); }
         
         .overflow-hidden { overflow: hidden; }
         .pointer-events-none { pointer-events: none; }
@@ -248,17 +251,31 @@
         
         .text-center { text-align: center; }
         
+        /* Logo styling */
+        .punk-logo {
+            max-width: 250px;
+            height: auto;
+            border: 4px solid white;
+            box-shadow: 8px 8px 0px 0px #FF00FF;
+            transform: rotate(3deg);
+            background-color: black;
+        }
+
         @media (min-width: 768px) {
             .md\:p-8 { padding: 2rem; }
             .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
             .md\:text-8xl { font-size: 6rem; line-height: 1; }
             .md\:w-1\/4 { width: 25%; }
+            .md\:w-1\/3 { width: 33.333333%; }
+            .md\:w-2\/3 { width: 66.666667%; }
             .md\:w-3\/4 { width: 75%; }
             .md\:w-auto { width: auto; }
             .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
             .md\:col-span-12 { grid-column: span 12 / span 12; }
             .md\:flex-row { flex-direction: row; }
+            .md\:justify-end { justify-content: flex-end; }
+            .md\:mt-0 { margin-top: 0; }
         }
         
         @media (min-width: 1024px) {
@@ -271,13 +288,21 @@
     <div class="max-w-7xl mx-auto space-y-12 mb-20">
 
         <header class="neo-box p-8 bg-black text-white relative overflow-hidden">
-            <div class="relative z-10">
-                <div class="inline-block bg-white text-black px-2 py-1 mb-2 font-bold uppercase border-2 border-white transform -rotate-1">Source Material: Punk Rock Pepe Thesis</div>
-                <h1 class="text-6xl md:text-8xl font-glitch leading-none text-white mb-4">PUNK ROCK<br><span style="color: #EAFF00;">PEPE</span></h1>
-                <p class="text-xl md:text-2xl font-bold max-w-2xl border-l-4 pl-4" style="border-color: #FF00FF;">
-                    Fair Launch. Real Chaos. Nothing Else.<br>
-                    <span class="text-gray-400 text-base font-normal">A data-driven breakdown of a cultural experiment on Solana.</span>
-                </p>
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                
+                <div class="w-full md:w-2/3">
+                    <div class="inline-block bg-white text-black px-2 py-1 mb-2 font-bold uppercase border-2 border-white transform -rotate-1">Source Material: Punk Rock Pepes Thesis</div>
+                    <h1 class="text-6xl md:text-8xl font-glitch leading-none text-white mb-4">PUNK ROCK<br><span style="color: #EAFF00;">PEPES</span></h1>
+                    <p class="text-xl md:text-2xl font-bold max-w-2xl border-l-4 pl-4" style="border-color: #FF00FF;">
+                        Fair Launch. Real Chaos. Nothing Else.<br>
+                        <span class="text-gray-400 text-base font-normal">A data-driven breakdown of a cultural experiment on Solana.</span>
+                    </p>
+                </div>
+
+                <div class="w-full md:w-1/3 flex justify-center md:justify-end mt-4 md:mt-0">
+                    <img src="https://i.imgur.com/empjcbr.png" alt="Punk Rock Pepes Logo" class="punk-logo">
+                </div>
+
             </div>
             <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none" style="background-color: #FF00FF;"></div>
         </header>
@@ -286,7 +311,7 @@
             <div class="mb-6">
                 <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform rotate-1">01. The Manifesto</h2>
                 <p class="mt-4 text-lg bg-white inline-block p-2 border-2 border-black">
-                    Punk Rock Pepe isn't trying to change the world. It's laughing at it while it burns. Before diving into the data, we must understand the ideological gap between the "Corporate" crypto world and the "Punk" reality.
+                    Punk Rock Pepes isn't trying to change the world. It's laughing at it while it burns. Before diving into the data, we must understand the ideological gap between the "Corporate" crypto world and the "Punk" reality.
                 </p>
             </div>
 
@@ -399,7 +424,7 @@
                 <div class="neo-box p-6">
                     <div class="mb-4 border-b-2 border-black pb-2">
                         <h3 class="text-xl font-bold uppercase">Volatility Profile</h3>
-                        <p class="text-xs text-gray-500">Punk Pepe vs. Standard Rug</p>
+                        <p class="text-xs text-gray-500">Punk Pepes vs. Standard Rug</p>
                     </div>
 
                     <div class="chart-container">
@@ -504,7 +529,7 @@
             "Forget the whitepaper. Read the room.",
             "No VCs to dump on you. Just chaos.",
             "Liquidity is burnt. So are the bridges.",
-            "Punk Rock Pepe: Laughing while it burns.",
+            "Punk Rock Pepes: Laughing while it burns.",
             "Fair launch means fair chance.",
             "We don't build roadmaps. We build noise.",
             "Fade at your own risk.",
@@ -521,7 +546,7 @@
             "Marketing budget: Zero. Attitude: Maximum.",
             "Exit liquidity? We burned the exit.",
             "Presale is a scam. We skip the scam.",
-            "No promises. Just Pepe and punk rock.",
+            "No promises. Just Pepes and punk rock.",
             "DYOR or don't. We don't care.",
             "Rug immunity: Liquidity deleted.",
             "Your lambo is parked in your imagination.",
@@ -640,7 +665,7 @@
                         pointRadius: 0
                     },
                     {
-                        label: 'Punk Rock Pepe',
+                        label: 'Punk Rock Pepes',
                         data: [10, 40, 25, 65, 45, 90],
                         borderColor: '#FF00FF',
                         backgroundColor: 'rgba(255, 0, 255, 0.1)',
