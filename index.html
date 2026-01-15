@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rubik+Glitch&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rubik+Glitch&family=Inter:wght@900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -30,11 +30,12 @@
             font-family: 'Rubik Glitch', display;
         }
 
-        /* CLASE NUEVA PARA TITULARES LEGIBLES */
+        /* CLASE NUEVA PARA TITULARES DE PRENSA REALISTAS */
         .font-headline {
             font-family: 'Inter', sans-serif;
             font-weight: 900; /* Extra Bold */
             font-style: italic; /* Cursiva de acción */
+            letter-spacing: -1px;
         }
 
         .neo-box {
@@ -134,16 +135,16 @@
             fill: currentColor;
         }
 
-        /* --- ESTILOS PARA EL TEXTO SUPERPUESTO (CORREGIDO PARA LEGIBILIDAD) --- */
+        /* --- ESTILOS PARA EL TEXTO SUPERPUESTO (CORREGIDO: CERO GLITCH) --- */
         .meme-overlay-container {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.85); /* Fondo oscuro */
+            background: rgba(0, 0, 0, 0.9); /* Fondo casi negro sólido para leer bien */
             border-top: 4px solid #EAFF00;
-            padding: 1rem 2rem; /* Más padding lateral */
-            min-height: 80px;
+            padding: 1.5rem 2rem; 
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -152,23 +153,23 @@
 
         .meme-text {
             color: white;
-            /* AQUÍ ESTÁ EL CAMBIO IMPORTANTE: */
-            font-family: 'Inter', sans-serif; /* Fuente limpia */
-            font-weight: 900; /* Extra Bold */
-            font-style: italic; /* Cursiva */
+            /* FUENTE FIX: Usamos Inter Black en lugar de Glitch */
+            font-family: 'Inter', sans-serif; 
+            font-weight: 900; 
+            font-style: italic; 
             
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             line-height: 1.1;
             text-align: center;
             text-transform: uppercase;
             
-            /* Sombra negra dura para contraste máximo */
+            /* Sombra dura para legibilidad perfecta */
             text-shadow: 3px 3px 0px #000000; 
             margin: 0;
         }
 
         @media (min-width: 768px) {
-            .meme-text { font-size: 2rem; } /* Texto más grande en PC */
+            .meme-text { font-size: 2.2rem; } 
         }
 
         .chart-container {
@@ -216,7 +217,7 @@
             50% { background-color: var(--neon-yellow); }
         }
 
-        /* Utility Classes (Tailwind-ish) */
+        /* Utility Classes */
         .p-2 { padding: 0.5rem; }
         .p-4 { padding: 1rem; }
         .p-6 { padding: 1.5rem; }
@@ -816,14 +817,18 @@
             "{topic} crashes the simulation; developers panic selling reality."
         ];
 
-        // --- ARRAY DE IMÁGENES ---
-        // Pega aquí las URLs de tus imágenes de GitHub
-        const newsImages = [
-            "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/imagen1.jpg", 
-            "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/imagen2.jpg", 
-            "https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/imagen3.jpg"
-            // Agrega más separadas por coma
-        ];
+        // --- ARRAY DE IMÁGENES AUTOMÁTICO ---
+        // Generamos la lista de 10 imágenes (fondonews (1) a (10)) desde tu repo GitHub
+        
+        const repoBaseUrl = "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/";
+        
+        const newsImages = [];
+        for (let i = 1; i <= 10; i++) {
+            // Nota: Es importante que el espacio entre 'fondonews' y '(N)' esté codificado como %20
+            // en la URL final, pero el navegador suele manejarlo. 
+            // Si no carga, cambia el nombre en github a sin espacios (fondonews1.png).
+            newsImages.push(`${repoBaseUrl}fondonews%20(${i}).png`);
+        }
 
         let currentHeadline = "";
 
@@ -884,11 +889,7 @@
                 visual.classList.remove('hidden');
                 
                 // Seleccionar imagen aleatoria
-                // Si el array está vacío o fallan las URLs, usa un placeholder de respaldo
-                let randomImg = "https://placehold.co/1280x720/black/FFF?text=NO+IMAGE+FOUND";
-                if(newsImages.length > 0 && !newsImages[0].includes("TU_USUARIO")) {
-                     randomImg = newsImages[Math.floor(Math.random() * newsImages.length)];
-                }
+                const randomImg = newsImages[Math.floor(Math.random() * newsImages.length)];
                 
                 // Aplicar imagen de fondo
                 visual.style.backgroundImage = `url('${randomImg}')`;
