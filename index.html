@@ -594,9 +594,12 @@
             <div class="mb-6">
                 <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform -rotate-1">01.5 TOKEN CA</h2>
             </div>
-            <div id="ca-box" class="neo-box p-6 bg-black border-4 border-[#00FFFF] relative shadow-[8px_8px_0px_#FF00FF]">
-                <p class="text-[#EAFF00] font-mono mb-2 font-bold uppercase">Contract Address (Solana):</p>
-                <div class="flex flex-col md:flex-row gap-4 items-center">
+            
+            <div id="ca-box" class="neo-box p-8 bg-black border-4 border-[#00FFFF] relative shadow-[8px_8px_0px_#FF00FF] flex flex-col justify-center items-center gap-4 min-h-[200px]">
+                
+                <p class="text-[#EAFF00] font-mono font-bold uppercase text-center w-full">Contract Address (Solana):</p>
+                
+                <div class="flex flex-col md:flex-row gap-4 items-center w-full">
                     <input type="text" id="ca-input" value="AQUÍ_VA_TU_CA_REAL_DE_SOLANA_REEMPLAZAME" readonly
                         class="w-full md:w-3/4 bg-gray-900 border-2 border-[#EAFF00] text-white p-4 font-mono text-lg focus:outline-none font-bold text-center md:text-left truncate selection:bg-[#FF00FF] selection:text-white cursor-text">
                     
@@ -605,7 +608,8 @@
                          COPY CA
                     </button>
                 </div>
-                <p id="copy-feedback" class="text-green-500 font-bold font-mono mt-2 text-sm hidden text-center md:text-left">✓ Address copied to clipboard!</p>
+                
+                <p id="copy-feedback" class="text-green-500 font-bold font-mono text-sm hidden text-center">✓ Address copied to clipboard!</p>
             </div>
         </section>
 
