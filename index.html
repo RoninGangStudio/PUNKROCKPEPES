@@ -77,6 +77,44 @@
             box-shadow: 2px 2px 0px 0px var(--neon-pink);
         }
 
+        /* --- ESTILO ESPECIAL PARA EL BOTÓN DE COPIAR CA --- */
+        .copy-btn {
+            background-color: #00FFFF; /* Cian Neón base */
+            color: black;
+            border: 4px solid black; /* Borde grueso */
+            font-family: 'Space Mono', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 6px 6px 0px #FF00FF; /* Sombra Rosa */
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .copy-btn:hover {
+            background-color: black;
+            color: #00FFFF; /* Texto Cian */
+            border-color: #00FFFF; /* Borde Cian */
+            box-shadow: 6px 6px 0px #EAFF00; /* Sombra cambia a Amarilla */
+            transform: translate(-2px, -2px);
+        }
+
+        .copy-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px transparent;
+        }
+
+        .copy-icon {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2.5;
+        }
+
         /* --- ESTILOS ESPECÍFICOS PARA PEPE TV --- */
         .news-btn-group {
             display: flex;
@@ -561,8 +599,8 @@
                     <input type="text" id="ca-input" value="AQUÍ_VA_TU_CA_REAL_DE_SOLANA_REEMPLAZAME" readonly
                         class="w-full md:w-3/4 bg-gray-900 border-2 border-[#EAFF00] text-white p-4 font-mono text-lg focus:outline-none font-bold text-center md:text-left truncate selection:bg-[#FF00FF] selection:text-white cursor-text">
                     
-                    <button onclick="copyCA()" class="neo-btn w-full md:w-1/4 bg-[#00FFFF] text-black border-none hover:bg-white hover:text-black">
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                    <button onclick="copyCA()" class="copy-btn w-full md:w-1/4">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="copy-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
                          COPY CA
                     </button>
                 </div>
@@ -586,11 +624,8 @@
                 <div id="chaos-display" class="bg-white p-6 mb-8 min-h-[120px] flex items-center justify-center" style="border: 4px solid #FF00FF; box-shadow: inset 0px 0px 20px rgba(0,0,0,0.2);">
                     <p class="text-xl md:text-2xl font-bold font-mono text-black leading-tight">"Click the button to ignite the chaos."</p>
                 </div>
-
-                <button onclick="generateChaos()" id="gen-btn" class="neo-btn text-xl w-full md:w-auto">
-                    Generate Raid Copy
-                </button>
-            </div>
+                
+                </div>
         </section>
 
         <section>
