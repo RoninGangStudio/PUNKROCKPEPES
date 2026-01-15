@@ -61,6 +61,10 @@
             transition: transform 0.1s;
             cursor: pointer;
             padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .neo-btn:hover {
@@ -211,10 +215,16 @@
         
         .shaking { animation: shake 0.5s; }
         .flash-yellow { animation: flash 0.2s; }
+        .flash-cyan { animation: flash-cyan 0.5s; }
 
         @keyframes flash {
             0%, 100% { background-color: white; }
             50% { background-color: var(--neon-yellow); }
+        }
+        
+        @keyframes flash-cyan {
+            0%, 100% { background-color: var(--void-black); }
+            50% { background-color: var(--neon-blue); }
         }
 
         /* Utility Classes */
@@ -293,6 +303,7 @@
         .text-red-500 { color: #ef4444; }
         .text-red-600 { color: #dc2626; }
         .text-cyan-400 { color: #22d3ee; }
+        .text-green-500 { color: #22c55e; }
         .text-green-600 { color: #16a34a; }
         
         .bg-white { background-color: #ffffff; }
@@ -373,6 +384,10 @@
 
         .shadow-\[8px_8px_0px_\#00FFFF\] {
             box-shadow: 8px 8px 0px 0px #00FFFF;
+        }
+        
+        .shadow-\[8px_8px_0px_\#FF00FF\] {
+            box-shadow: 8px 8px 0px 0px #FF00FF;
         }
 
         .shadow-\[0px_0px_20px_\#FF00FF\] {
@@ -533,6 +548,25 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform -rotate-1">01.5 TOKEN CA</h2>
+            </div>
+            <div id="ca-box" class="neo-box p-6 bg-black border-4 border-[#00FFFF] relative shadow-[8px_8px_0px_#FF00FF]">
+                <p class="text-[#EAFF00] font-mono mb-2 font-bold uppercase">Contract Address (Solana):</p>
+                <div class="flex flex-col md:flex-row gap-4 items-center">
+                    <input type="text" id="ca-input" value="AQUÍ_VA_TU_CA_REAL_DE_SOLANA_REEMPLAZAME" readonly
+                        class="w-full md:w-3/4 bg-gray-900 border-2 border-[#EAFF00] text-white p-4 font-mono text-lg focus:outline-none font-bold text-center md:text-left truncate selection:bg-[#FF00FF] selection:text-white cursor-text">
+                    
+                    <button onclick="copyCA()" class="neo-btn w-full md:w-1/4 bg-[#00FFFF] text-black border-none hover:bg-white hover:text-black">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                         COPY CA
+                    </button>
+                </div>
+                <p id="copy-feedback" class="text-green-500 font-bold font-mono mt-2 text-sm hidden text-center md:text-left">✓ Address copied to clipboard!</p>
             </div>
         </section>
 
@@ -754,6 +788,34 @@
     </div>
 
     <script>
+        // --- FUNCIONALIDAD COPIAR CA ---
+        function copyCA() {
+            const caInput = document.getElementById('ca-input');
+            const feedback = document.getElementById('copy-feedback');
+            const caBox = document.getElementById('ca-box');
+
+            // Seleccionar el texto (para visual en PC)
+            caInput.select();
+            caInput.setSelectionRange(0, 99999); // Para móviles
+
+             // Copiar al portapapeles
+            navigator.clipboard.writeText(caInput.value).then(() => {
+                // Mostrar feedback
+                feedback.classList.remove('hidden');
+                // Efecto flash en la caja
+                caBox.classList.add('flash-cyan');
+                
+                // Ocultar después de 2 segundos
+                setTimeout(() => {
+                    feedback.classList.add('hidden');
+                    caBox.classList.remove('flash-cyan');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Error al copiar. Hazlo manualmente.');
+            });
+        }
+
         const chaosPhrases = [
             "Forget the whitepaper. Read the room.",
             "No VCs to dump on you. Just chaos.",
@@ -818,15 +880,13 @@
         ];
 
         // --- ARRAY DE IMÁGENES AUTOMÁTICO ---
-        // Generamos la lista de 10 imágenes (fondonews (1) a (10)) desde tu repo GitHub
-        
+        // Generamos la lista de las 10 primeras imágenes de tu repo GitHub
+        // URL BASE detectada de tus capturas:
         const repoBaseUrl = "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/";
         
         const newsImages = [];
         for (let i = 1; i <= 10; i++) {
-            // Nota: Es importante que el espacio entre 'fondonews' y '(N)' esté codificado como %20
-            // en la URL final, pero el navegador suele manejarlo. 
-            // Si no carga, cambia el nombre en github a sin espacios (fondonews1.png).
+            // Usamos .png y codificamos el espacio como %20 por seguridad
             newsImages.push(`${repoBaseUrl}fondonews%20(${i}).png`);
         }
 
