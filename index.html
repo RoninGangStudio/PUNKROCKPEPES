@@ -30,11 +30,10 @@
             font-family: 'Rubik Glitch', display;
         }
 
-        /* CLASE NUEVA PARA TITULARES DE PRENSA REALISTAS */
         .font-headline {
             font-family: 'Inter', sans-serif;
-            font-weight: 900; /* Extra Bold */
-            font-style: italic; /* Cursiva de acción */
+            font-weight: 900;
+            font-style: italic;
             letter-spacing: -1px;
         }
 
@@ -50,7 +49,6 @@
             box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
         }
 
-        /* --- ESTILOS DE BOTONES GENERALES --- */
         .neo-btn {
             background: black;
             color: white;
@@ -77,11 +75,10 @@
             box-shadow: 2px 2px 0px 0px var(--neon-pink);
         }
 
-        /* --- ESTILO ESPECIAL PARA EL BOTÓN DE COPIAR CA --- */
         .copy-btn {
-            background-color: #00FFFF; /* Cian Neón base */
+            background-color: #00FFFF;
             color: black;
-            border: 4px solid black; /* Borde grueso */
+            border: 4px solid black;
             font-family: 'Space Mono', monospace;
             font-weight: 900;
             font-size: 1.2rem;
@@ -92,15 +89,15 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 6px 6px 0px #FF00FF; /* Sombra Rosa */
+            box-shadow: 6px 6px 0px #FF00FF;
             transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .copy-btn:hover {
             background-color: black;
-            color: #00FFFF; /* Texto Cian */
-            border-color: #00FFFF; /* Borde Cian */
-            box-shadow: 6px 6px 0px #EAFF00; /* Sombra cambia a Amarilla */
+            color: #00FFFF;
+            border-color: #00FFFF;
+            box-shadow: 6px 6px 0px #EAFF00;
             transform: translate(-2px, -2px);
         }
 
@@ -115,7 +112,6 @@
             stroke-width: 2.5;
         }
 
-        /* --- ESTILOS ESPECÍFICOS PARA PEPE TV --- */
         .news-btn-group {
             display: flex;
             gap: 1rem;
@@ -177,13 +173,12 @@
             fill: currentColor;
         }
 
-        /* --- ESTILOS PARA EL TEXTO SUPERPUESTO (CORREGIDO: CERO GLITCH) --- */
         .meme-overlay-container {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9); /* Fondo casi negro sólido para leer bien */
+            background: rgba(0, 0, 0, 0.9);
             border-top: 4px solid #EAFF00;
             padding: 1.5rem 2rem; 
             min-height: 100px;
@@ -195,17 +190,13 @@
 
         .meme-text {
             color: white;
-            /* FUENTE FIX: Usamos Inter Black en lugar de Glitch */
             font-family: 'Inter', sans-serif; 
             font-weight: 900; 
             font-style: italic; 
-            
             font-size: 1.4rem;
             line-height: 1.1;
             text-align: center;
             text-transform: uppercase;
-            
-            /* Sombra dura para legibilidad perfecta */
             text-shadow: 3px 3px 0px #000000; 
             margin: 0;
         }
@@ -233,7 +224,6 @@
             }
         }
 
-        /* Helpers y Utilidades */
         .highlight-yellow { background-color: var(--neon-yellow); padding: 0 4px; }
         .highlight-pink { background-color: var(--neon-pink); color: white; padding: 0 4px; }
 
@@ -265,7 +255,6 @@
             50% { background-color: var(--neon-blue); }
         }
 
-        /* Utility Classes */
         .p-2 { padding: 0.5rem; }
         .p-4 { padding: 1rem; }
         .p-6 { padding: 1.5rem; }
@@ -460,7 +449,6 @@
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
         }
         
-        /* Logo styling */
         .punk-logo {
             max-width: 340px;
             height: auto;
@@ -493,7 +481,6 @@
             .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         }
 
-        /* --- ARREGLO PARA MÓVILES --- */
         @media (max-width: 768px) {
             .punk-logo {
                 max-width: 240px !important; 
@@ -893,14 +880,11 @@
             const caInput = document.getElementById('ca-input');
             const feedback = document.getElementById('copy-feedback');
             const caBox = document.getElementById('ca-box');
-
             caInput.select();
             caInput.setSelectionRange(0, 99999);
-
             navigator.clipboard.writeText(caInput.value).then(() => {
                 feedback.classList.remove('hidden');
                 caBox.classList.add('flash-cyan');
-                
                 setTimeout(() => {
                     feedback.classList.add('hidden');
                     caBox.classList.remove('flash-cyan');
@@ -948,37 +932,13 @@
             const btn = document.getElementById('gen-btn');
             const display = document.getElementById('chaos-display');
             const textElement = display.querySelector('p');
-
             btn.classList.add('shaking');
             setTimeout(() => btn.classList.remove('shaking'), 500);
-
             const randomIndex = Math.floor(Math.random() * chaosPhrases.length);
             textElement.innerText = chaosPhrases[randomIndex] + " @punkrockpepes";
-            
             display.classList.add('flash-yellow');
             setTimeout(() => display.classList.remove('flash-yellow'), 200);
         }
-
-        const newsTemplates = [
-            "BREAKING: {topic} declared illegal by the Galactic Federation of Pepes.",
-            "Scientists confirm {topic} causes massive brain rot in boomers.",
-            "Why {topic} is actually a sophisticated rug pull designed by aliens.",
-            "Local Pepe sells kidney to buy more {topic}, regrets nothing.",
-            "Financial Advisors hate him! How to lose money fast with {topic}.",
-            "{topic}: Bullish signal or sign of mental illness? Experts debate.",
-            "Government admits {topic} was a psyop to distract us from the price of bananas.",
-            "New study shows 99% of exposure to {topic} leads to pixelated hallucinations.",
-            "If you don't like {topic}, you are probably a corporate spy.",
-            "{topic} crashes the simulation; developers panic selling reality."
-        ];
-
-        const repoBaseUrl = "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/";
-        const newsImages = [];
-        for (let i = 1; i <= 10; i++) {
-            newsImages.push(`${repoBaseUrl}fondonews%20(${i}).png`);
-        }
-
-        let currentHeadline = "";
 
         function generateHeadline() {
             const input = document.getElementById('news-input').value.trim();
@@ -986,6 +946,18 @@
             const imgBtn = document.getElementById('btn-img-gen');
             const imageArea = document.getElementById('image-result-area');
             const topic = input || "YOUR WALLET"; 
+            const newsTemplates = [
+                "BREAKING: {topic} declared illegal by the Galactic Federation of Pepes.",
+                "Scientists confirm {topic} causes massive brain rot in boomers.",
+                "Why {topic} is actually a sophisticated rug pull designed by aliens.",
+                "Local Pepe sells kidney to buy more {topic}, regrets nothing.",
+                "Financial Advisors hate him! How to lose money fast with {topic}.",
+                "{topic}: Bullish signal or sign of mental illness? Experts debate.",
+                "Government admits {topic} was a psyop to distract us from the price of bananas.",
+                "New study shows 99% of exposure to {topic} leads to pixelated hallucinations.",
+                "If you don't like {topic}, you are probably a corporate spy.",
+                "{topic} crashes the simulation; developers panic selling reality."
+            ];
             const randomIndex = Math.floor(Math.random() * newsTemplates.length);
             const template = newsTemplates[randomIndex];
             currentHeadline = template.replace("{topic}", `<span class="text-[#FF00FF]">${topic}</span>`);
@@ -1006,8 +978,10 @@
             const visual = document.getElementById('generated-visual');
             const memeText = document.getElementById('meme-final-text');
             const shareControls = document.getElementById('share-controls');
+            const repoBaseUrl = "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/";
+            const newsImages = [];
+            for (let i = 1; i <= 10; i++) { newsImages.push(`${repoBaseUrl}fondonews%20(${i}).png`); }
             shareControls.classList.add('hidden');
-            shareControls.classList.remove('flex');
             imageArea.classList.remove('hidden');
             loader.classList.remove('hidden');
             visual.classList.add('hidden');
@@ -1017,8 +991,6 @@
                 visual.classList.remove('hidden');
                 const randomImg = newsImages[Math.floor(Math.random() * newsImages.length)];
                 visual.style.backgroundImage = `url('${randomImg}')`;
-                visual.style.backgroundSize = 'cover';
-                visual.style.backgroundPosition = 'center';
                 memeText.innerHTML = currentHeadline; 
                 imageArea.classList.add('flash-yellow');
                 setTimeout(() => imageArea.classList.remove('flash-yellow'), 200);
@@ -1037,6 +1009,7 @@
             });
         }
 
+        // CHARTS LOGIC
         function wrapLabel(label) {
             const maxLength = 16;
             if (label.length <= maxLength) return label;
@@ -1044,12 +1017,7 @@
             const lines = [];
             let currentLine = words[0];
             for (let i = 1; i < words.length; i++) {
-                if ((currentLine + " " + words[i]).length < maxLength) {
-                    currentLine += " " + words[i];
-                } else {
-                    lines.push(currentLine);
-                    currentLine = words[i];
-                }
+                if ((currentLine + " " + words[i]).length < maxLength) { currentLine += " " + words[i]; } else { lines.push(currentLine); currentLine = words[i]; }
             }
             lines.push(currentLine);
             return lines;
@@ -1073,8 +1041,7 @@
                     data: [100, 0, 0, 0],
                     backgroundColor: ['#EAFF00', '#000000', '#808080', '#C0C0C0'],
                     borderColor: '#000000',
-                    borderWidth: 3,
-                    hoverOffset: 10
+                    borderWidth: 3
                 }]
             },
             options: {
@@ -1093,28 +1060,8 @@
             data: {
                 labels: ['Launch', 'Day 1', 'Day 3', 'Week 1', 'Week 2', 'Month 1'].map(wrapLabel),
                 datasets: [
-                    {
-                        label: 'Standard Scam',
-                        data: [10, 80, 95, 10, 0, 0],
-                        borderColor: '#9ca3af',
-                        borderWidth: 2,
-                        borderDash: [5, 5],
-                        tension: 0.4,
-                        pointRadius: 0
-                    },
-                    {
-                        label: 'Punk Rock Pepes',
-                        data: [10, 40, 25, 65, 45, 90],
-                        borderColor: '#FF00FF',
-                        backgroundColor: 'rgba(255, 0, 255, 0.1)',
-                        borderWidth: 3,
-                        tension: 0,
-                        pointBackgroundColor: '#000000',
-                        pointBorderColor: '#000000',
-                        pointRadius: 6,
-                        pointHoverRadius: 8,
-                        fill: true
-                    }
+                    { label: 'Standard Scam', data: [10, 80, 95, 10, 0, 0], borderColor: '#9ca3af', borderWidth: 2, borderDash: [5, 5], pointRadius: 0 },
+                    { label: 'Punk Rock Pepes', data: [10, 40, 25, 65, 45, 90], borderColor: '#FF00FF', backgroundColor: 'rgba(255, 0, 255, 0.1)', borderWidth: 3, pointBackgroundColor: '#000000', pointRadius: 6, fill: true }
                 ]
             },
             options: {
@@ -1164,29 +1111,23 @@
 
         function togglePlay() {
             if (player.paused) { 
-                if(!player.src) {
-                    const firstTrack = document.querySelector('.track-item');
-                    loadTrack(tracks[0].file, firstTrack);
-                } else { player.play(); }
+                if(!player.src) { loadTrack(tracks[0].file, document.querySelector('.track-item')); } else { player.play(); }
             } else { player.pause(); }
         }
 
         player.onended = () => {
             currentTrackIndex++;
             if (currentTrackIndex < tracks.length) {
-                const nextTrackElement = document.querySelectorAll('.track-item')[currentTrackIndex];
-                loadTrack(tracks[currentTrackIndex].file, nextTrackElement);
+                loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
             } else {
                 currentTrackIndex = 0;
-                const firstTrackElement = document.querySelectorAll('.track-item')[0];
-                loadTrack(tracks[0].file, firstTrackElement);
+                loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
             }
         };
 
         window.addEventListener('click', () => {
             if (!player.src || player.src === "") {
-                const firstTrackElement = document.querySelectorAll('.track-item')[0];
-                loadTrack(tracks[0].file, firstTrackElement);
+                loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
             }
         }, { once: true });
 
