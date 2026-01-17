@@ -177,13 +177,13 @@
             fill: currentColor;
         }
 
-        /* --- ESTILOS PARA EL TEXTO SUPERPUESTO --- */
+        /* --- ESTILOS PARA EL TEXTO SUPERPUESTO (CORREGIDO: CERO GLITCH) --- */
         .meme-overlay-container {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.9); /* Fondo casi negro sólido para leer bien */
             border-top: 4px solid #EAFF00;
             padding: 1.5rem 2rem; 
             min-height: 100px;
@@ -195,6 +195,7 @@
 
         .meme-text {
             color: white;
+            /* FUENTE FIX: Usamos Inter Black en lugar de Glitch */
             font-family: 'Inter', sans-serif; 
             font-weight: 900; 
             font-style: italic; 
@@ -204,6 +205,7 @@
             text-align: center;
             text-transform: uppercase;
             
+            /* Sombra dura para legibilidad perfecta */
             text-shadow: 3px 3px 0px #000000; 
             margin: 0;
         }
@@ -263,10 +265,13 @@
             50% { background-color: var(--neon-blue); }
         }
 
+        /* Utility Classes */
         .p-2 { padding: 0.5rem; }
         .p-4 { padding: 1rem; }
         .p-6 { padding: 1.5rem; }
         .p-8 { padding: 2rem; }
+        .px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+        .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
         .px-4 { padding-left: 1rem; padding-right: 1rem; }
         .px-8 { padding-left: 2rem; padding-right: 2rem; }
         .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
@@ -279,6 +284,7 @@
         .pt-8 { padding-top: 2rem; }
         .pr-2 { padding-right: 0.5rem; }
         
+        .m-auto { margin: auto; }
         .mx-auto { margin-left: auto; margin-right: auto; }
         .mb-2 { margin-bottom: 0.5rem; }
         .mb-4 { margin-bottom: 1rem; }
@@ -286,7 +292,11 @@
         .mb-8 { margin-bottom: 2rem; }
         .mb-12 { margin-bottom: 3rem; }
         .mb-20 { margin-bottom: 5rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-2 { margin-top: 0.5rem; }
         .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mr-2 { margin-right: 0.5rem; }
         
         .max-w-2xl { max-width: 42rem; }
         .max-w-3xl { max-width: 48rem; }
@@ -296,8 +306,10 @@
         .min-h-\[60px\] { min-height: 60px; }
         .w-full { width: 100%; }
         .w-8 { width: 2rem; }
+        .w-64 { width: 16rem; }
         .h-2 { height: 0.5rem; }
         .h-8 { height: 2rem; }
+        .h-64 { height: 16rem; }
         .h-full { height: 100%; }
         
         .space-y-0 > * + * { margin-top: 0; }
@@ -318,26 +330,33 @@
         .text-6xl { font-size: 3.75rem; line-height: 1; }
         
         .font-bold { font-weight: 700; }
+        .font-black { font-weight: 900; }
+        .font-normal { font-weight: 400; }
         .font-mono { font-family: 'Space Mono', monospace; }
         
         .text-white { color: #ffffff; }
         .text-black { color: #000000; }
         .text-gray-400 { color: #9ca3af; }
         .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
         .text-gray-700 { color: #374151; }
         .text-red-500 { color: #ef4444; }
         .text-red-600 { color: #dc2626; }
         .text-cyan-400 { color: #22d3ee; }
         .text-green-500 { color: #22c55e; }
+        .text-green-600 { color: #16a34a; }
         
         .bg-white { background-color: #ffffff; }
         .bg-black { background-color: #000000; }
         .bg-gray-100 { background-color: #f3f4f6; }
         .bg-gray-200 { background-color: #e5e7eb; }
+        .bg-gray-300 { background-color: #d1d5db; }
+        .bg-gray-800 { background-color: #1f2937; }
         .bg-gray-900 { background-color: #111827; }
         .bg-red-600 { background-color: #dc2626; }
         .bg-green-500 { background-color: #22c55e; }
         
+        .border { border-width: 1px; }
         .border-2 { border-width: 2px; }
         .border-4 { border-width: 4px; }
         .border-black { border-color: #000000; }
@@ -369,6 +388,8 @@
         .top-0 { top: 0; }
         .top-2 { top: 0.5rem; }
         .right-2 { right: 0.5rem; }
+        .left-0 { left: 0; }
+        .bottom-0 { bottom: 0; }
         .-left-\[18px\] { left: -18px; }
         .-right-20 { right: -5rem; }
         .-top-20 { top: -5rem; }
@@ -380,6 +401,7 @@
         .rotate-1 { transform: rotate(1deg); }
         .-rotate-1 { transform: rotate(-1deg); }
         .rotate-2 { transform: rotate(2deg); }
+        .rotate-3 { transform: rotate(3deg); }
         
         .overflow-hidden { overflow: hidden; }
         .pointer-events-none { pointer-events: none; }
@@ -428,6 +450,17 @@
         .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         .animate-bounce { animation: bounce 1s infinite; }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+            50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        }
+        
+        /* Logo styling */
         .punk-logo {
             max-width: 340px;
             height: auto;
@@ -447,6 +480,7 @@
             .md\:w-1\/2 { width: 50%; }
             .md\:w-2\/3 { width: 66.666667%; }
             .md\:w-3\/4 { width: 75%; }
+            .md\:w-auto { width: auto; }
             .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
             .md\:col-span-12 { grid-column: span 12 / span 12; }
@@ -455,6 +489,11 @@
             .md\:mt-0 { margin-top: 0; }
         }
         
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+
+        /* --- ARREGLO PARA MÓVILES --- */
         @media (max-width: 768px) {
             .punk-logo {
                 max-width: 240px !important; 
@@ -1179,10 +1218,11 @@
         function loadTrack(file, element) {
             player.pause();
             player.src = file;
-            player.load();
+            player.load(); // Esto asegura que cargue el nuevo archivo antes de dar play
+            
             player.play().then(() => {
                 console.log("Playing: " + file);
-            }).catch(e => console.log("User interaction required for audio."));
+            }).catch(e => console.log("User interaction needed."));
 
             trackTitle.innerText = element.innerText;
             currentTrackIndex = tracks.findIndex(t => t.file === file);
