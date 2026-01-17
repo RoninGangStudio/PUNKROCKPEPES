@@ -30,11 +30,10 @@
             font-family: 'Rubik Glitch', display;
         }
 
-        /* CLASE NUEVA PARA TITULARES DE PRENSA REALISTAS */
         .font-headline {
             font-family: 'Inter', sans-serif;
-            font-weight: 900; /* Extra Bold */
-            font-style: italic; /* Cursiva de acción */
+            font-weight: 900;
+            font-style: italic;
             letter-spacing: -1px;
         }
 
@@ -50,7 +49,6 @@
             box-shadow: 12px 12px 0px 0px rgba(0,0,0,1);
         }
 
-        /* --- ESTILOS DE BOTONES GENERALES --- */
         .neo-btn {
             background: black;
             color: white;
@@ -77,11 +75,10 @@
             box-shadow: 2px 2px 0px 0px var(--neon-pink);
         }
 
-        /* --- ESTILO ESPECIAL PARA EL BOTÓN DE COPIAR CA --- */
         .copy-btn {
-            background-color: #00FFFF; /* Cian Neón base */
+            background-color: #00FFFF;
             color: black;
-            border: 4px solid black; /* Borde grueso */
+            border: 4px solid black;
             font-family: 'Space Mono', monospace;
             font-weight: 900;
             font-size: 1.2rem;
@@ -92,15 +89,15 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 6px 6px 0px #FF00FF; /* Sombra Rosa */
+            box-shadow: 6px 6px 0px #FF00FF;
             transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .copy-btn:hover {
             background-color: black;
-            color: #00FFFF; /* Texto Cian */
-            border-color: #00FFFF; /* Borde Cian */
-            box-shadow: 6px 6px 0px #EAFF00; /* Sombra cambia a Amarilla */
+            color: #00FFFF;
+            border-color: #00FFFF;
+            box-shadow: 6px 6px 0px #EAFF00;
             transform: translate(-2px, -2px);
         }
 
@@ -115,7 +112,6 @@
             stroke-width: 2.5;
         }
 
-        /* --- ESTILOS ESPECÍFICOS PARA PEPE TV --- */
         .news-btn-group {
             display: flex;
             gap: 1rem;
@@ -177,13 +173,12 @@
             fill: currentColor;
         }
 
-        /* --- ESTILOS PARA EL TEXTO SUPERPUESTO (CORREGIDO: CERO GLITCH) --- */
         .meme-overlay-container {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9); /* Fondo casi negro sólido para leer bien */
+            background: rgba(0, 0, 0, 0.9);
             border-top: 4px solid #EAFF00;
             padding: 1.5rem 2rem; 
             min-height: 100px;
@@ -195,17 +190,13 @@
 
         .meme-text {
             color: white;
-            /* FUENTE FIX: Usamos Inter Black en lugar de Glitch */
             font-family: 'Inter', sans-serif; 
             font-weight: 900; 
             font-style: italic; 
-            
             font-size: 1.4rem;
             line-height: 1.1;
             text-align: center;
             text-transform: uppercase;
-            
-            /* Sombra dura para legibilidad perfecta */
             text-shadow: 3px 3px 0px #000000; 
             margin: 0;
         }
@@ -233,7 +224,6 @@
             }
         }
 
-        /* Helpers y Utilidades */
         .highlight-yellow { background-color: var(--neon-yellow); padding: 0 4px; }
         .highlight-pink { background-color: var(--neon-pink); color: white; padding: 0 4px; }
 
@@ -265,7 +255,6 @@
             50% { background-color: var(--neon-blue); }
         }
 
-        /* Utility Classes */
         .p-2 { padding: 0.5rem; }
         .p-4 { padding: 1rem; }
         .p-6 { padding: 1.5rem; }
@@ -460,7 +449,6 @@
             50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
         }
         
-        /* Logo styling */
         .punk-logo {
             max-width: 340px;
             height: auto;
@@ -493,7 +481,6 @@
             .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         }
 
-        /* --- ARREGLO PARA MÓVILES --- */
         @media (max-width: 768px) {
             .punk-logo {
                 max-width: 240px !important; 
@@ -838,40 +825,47 @@
 
             <div class="neo-box bg-white overflow-hidden border-4 border-black shadow-[8px_8px_0px_#EAFF00]">
                 <div class="bg-black p-3 border-b-4 border-black flex justify-between items-center">
-                    <span class="text-white font-mono font-bold text-sm animate-pulse">● NOW PLAYING: <span id="current-track-title">CLICK ANYWHERE TO START THE CHAOS</span></span>
+                    <span class="text-white font-mono font-bold text-sm animate-pulse">● NOW PLAYING: <span id="current-track-title">LOADING...</span></span>
                     <div class="flex gap-2">
                         <div class="w-4 h-4 bg-[#FF00FF] border-2 border-white"></div>
                         <div class="w-4 h-4 bg-[#00FFFF] border-2 border-white"></div>
                     </div>
                 </div>
 
-                <div class="p-6 bg-white">
-                    <audio id="main-audio" preload="auto" crossorigin="anonymous"></audio>
+                <div id="audio-activator" class="p-8 bg-gradient-to-br from-[#FF00FF] to-[#00FFFF] text-center">
+                    <button onclick="initAudio()" class="neo-btn bg-black text-[#EAFF00] text-3xl py-6 px-12 border-4 border-white shadow-[8px_8px_0px_#000] animate-pulse" style="animation: pulse 1.5s infinite;">
+                        🔊 UNLEASH THE CHAOS
+                    </button>
+                    <p class="text-white font-bold mt-4 text-sm">Click to start the Punk Rock Pepes experience</p>
+                </div>
+
+                <div class="p-6 bg-white" id="player-controls" style="display: none;">
+                    <audio id="main-audio" preload="auto"></audio>
                     
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="flex flex-wrap gap-4 items-center">
-                            <button onclick="togglePlay()" id="play-btn" class="neo-btn bg-[#FF00FF] text-white py-4 px-8 text-xl border-2 border-black">PLAY / PAUSE</button>
+                            <button onclick="togglePlay()" id="play-btn" class="neo-btn bg-[#FF00FF] text-white py-4 px-8 text-xl border-2 border-black">▶ PLAY / PAUSE</button>
                             <div class="bg-black text-[#EAFF00] font-mono px-4 py-2 border-2 border-black">
-                                VOL: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.8" class="accent-[#EAFF00]">
+                                VOL: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.7" class="accent-[#EAFF00]">
                             </div>
                         </div>
 
                         <div class="flex-grow">
                             <div class="border-2 border-black bg-gray-100 p-2 max-h-64 overflow-y-auto font-mono text-sm">
-                                <div onclick="loadTrack('./PRPANTHEM1.wav', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
-                                <div onclick="loadTrack('./PRPANTHEM2.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
-                                <div onclick="loadTrack('./PRPANTHEM3.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
-                                <div onclick="loadTrack('./PRPANTHEM4.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
-                                <div onclick="loadTrack('./PRPANTHEM5.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
-                                <div onclick="loadTrack('./PRPANTHEM6.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
-                                <div onclick="loadTrack('./PRPANTHEM7.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
-                                <div onclick="loadTrack('./PRPANTHEM8.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
-                                <div onclick="loadTrack('./PRPANTHEM9.wav', this)" class="track-item p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
+                                <div onclick="loadTrack('PRPANTHEM1.wav', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
+                                <div onclick="loadTrack('PRPANTHEM2.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
+                                <div onclick="loadTrack('PRPANTHEM3.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
+                                <div onclick="loadTrack('PRPANTHEM4.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
+                                <div onclick="loadTrack('PRPANTHEM5.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
+                                <div onclick="loadTrack('PRPANTHEM6.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
+                                <div onclick="loadTrack('PRPANTHEM7.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
+                                <div onclick="loadTrack('PRPANTHEM8.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
+                                <div onclick="loadTrack('PRPANTHEM9.wav', this)" class="track-item p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-200 p-2 border-t-2 border-black text-[10px] font-bold text-center uppercase">PUNK_AUDIO_ENGINE_V2.5 // AUTO-SKIP ACTIVE // NO ROYALTIES</div>
+                <div class="bg-gray-200 p-2 border-t-2 border-black text-[10px] font-bold text-center uppercase">PUNK_AUDIO_ENGINE_V3.0 // AUTO-PLAY READY // NO ROYALTIES</div>
             </div>
         </section>
 
@@ -883,7 +877,7 @@
     </div>
 
     <script>
-        // --- COPIAR CA ---
+        // COPIAR CA
         function copyCA() {
             const caInput = document.getElementById('ca-input');
             const caBox = document.getElementById('ca-box');
@@ -894,7 +888,7 @@
             });
         }
 
-        // --- CHAOS GEN ---
+        // CHAOS GENERATOR
         const chaosPhrases = ["Forget the whitepaper. Read the room.", "No VCs. Just chaos.", "Liquidity is burnt.", "Enter the mosh pit."];
         function generateChaos() {
             const btn = document.getElementById('gen-btn');
@@ -907,7 +901,7 @@
             setTimeout(() => display.classList.remove('flash-yellow'), 200);
         }
 
-        // --- NEWS LOGIC ---
+        // NEWS LOGIC
         function generateHeadline() {
             const input = document.getElementById('news-input').value.trim() || "THE MARKET";
             const display = document.getElementById('news-display');
@@ -927,51 +921,69 @@
             }, 500);
         }
 
-        // --- CHARTS ---
+        // CHARTS
         const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
         new Chart(ctxToken, { type: 'doughnut', data: { labels: ['Community', 'Team', 'VCs'], datasets: [{ data: [100, 0, 0], backgroundColor: ['#EAFF00', '#000', '#888'], borderWidth: 3 }] }, options: { responsive: true, maintainAspectRatio: false } });
 
         const ctxVol = document.getElementById('volatilityChart').getContext('2d');
         new Chart(ctxVol, { type: 'line', data: { labels: ['L', 'D1', 'D3', 'W1'], datasets: [{ label: 'Punk Pepes', data: [10, 40, 25, 65], borderColor: '#FF00FF', borderWidth: 3, fill: true }] }, options: { responsive: true, maintainAspectRatio: false } });
 
-        // --- AUDIO ENGINE LOGIC (CORREGIDO) ---
+        // AUDIO ENGINE - AUTOPLAY AGRESIVO
         const player = document.getElementById('main-audio');
         const trackTitle = document.getElementById('current-track-title');
         const volSlider = document.getElementById('volume-slider');
+        const audioActivator = document.getElementById('audio-activator');
+        const playerControls = document.getElementById('player-controls');
         let currentTrackIndex = 0;
+        let audioInitialized = false;
 
         const tracks = [
-            { file: './PRPANTHEM1.wav', title: '01. We Are The Punk Rock Pepes' },
-            { file: './PRPANTHEM2.mp3', title: '02. PRP Bop' },
-            { file: './PRPANTHEM3.mp3', title: '03. CLARITY' },
-            { file: './PRPANTHEM4.mp3', title: '04. Set The World On Fire' },
-            { file: './PRPANTHEM5.mp3', title: '05. She_s For The Community_V2' },
-            { file: './PRPANTHEM6.mp3', title: '06. Wreck The Charts' },
-            { file: './PRPANTHEM7.mp3', title: '07. Ain_t No Chill Frog' },
-            { file: './PRPANTHEM8.mp3', title: '08. Wake The Chain' },
-            { file: './PRPANTHEM9.wav', title: '09. We Are The Punk Rock Pepes_V2' }
+            { file: 'PRPANTHEM1.wav', title: '01. We Are The Punk Rock Pepes' },
+            { file: 'PRPANTHEM2.mp3', title: '02. PRP Bop' },
+            { file: 'PRPANTHEM3.mp3', title: '03. CLARITY' },
+            { file: 'PRPANTHEM4.mp3', title: '04. Set The World On Fire' },
+            { file: 'PRPANTHEM5.mp3', title: '05. She_s For The Community_V2' },
+            { file: 'PRPANTHEM6.mp3', title: '06. Wreck The Charts' },
+            { file: 'PRPANTHEM7.mp3', title: '07. Ain_t No Chill Frog' },
+            { file: 'PRPANTHEM8.mp3', title: '08. Wake The Chain' },
+            { file: 'PRPANTHEM9.wav', title: '09. We Are The Punk Rock Pepes_V2' }
         ];
+
+        function initAudio() {
+            if (audioInitialized) return;
+            audioInitialized = true;
+            audioActivator.style.display = 'none';
+            playerControls.style.display = 'block';
+            loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
+        }
 
         function loadTrack(file, element) {
             player.pause();
             player.src = file;
-            player.load(); // FORZAR CARGA DEL ARCHIVO
+            player.load();
+            player.volume = volSlider.value;
             
             player.play().then(() => {
-                trackTitle.innerText = element.innerText;
+                trackTitle.innerText = element ? element.innerText : tracks[currentTrackIndex].title;
+                console.log('▶ Playing:', file);
             }).catch(e => {
-                console.log("Audio waiting for interaction.");
+                console.error('⚠ Autoplay blocked:', e);
+                trackTitle.innerText = "CLICK PLAY TO START";
             });
 
-            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('bg-[#EAFF00]', 'text-black'));
-            element.classList.add('bg-[#EAFF00]', 'text-black');
-            currentTrackIndex = tracks.findIndex(t => t.file === file);
+            if (element) {
+                document.querySelectorAll('.track-item').forEach(el => el.classList.remove('bg-[#EAFF00]', 'text-black'));
+                element.classList.add('bg-[#EAFF00]', 'text-black');
+                currentTrackIndex = tracks.findIndex(t => t.file === file);
+            }
         }
 
         function togglePlay() {
-            if (!player.src || player.src.includes('undefined')) {
-                loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
-            } else if (player.paused) { player.play(); } else { player.pause(); }
+            if (!audioInitialized) {
+                initAudio();
+                return;
+            }
+            if (player.paused) { player.play(); } else { player.pause(); }
         }
 
         player.onended = () => {
@@ -979,12 +991,20 @@
             loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
         };
 
-        // ACTIVADOR AL PRIMER CLIC
-        window.addEventListener('click', () => {
-            if (player.paused && (!player.src || player.src === "")) {
-                loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
-            }
-        }, { once: true });
+        // INTENTO DE AUTOPLAY AL CARGAR
+        window.addEventListener('load', () => {
+            player.src = tracks[0].file;
+            player.volume = 0.5;
+            player.muted = true;
+            player.play().then(() => {
+                player.muted = false;
+                player.volume = 0.7;
+                console.log('🎸 Autoplay successful!');
+                initAudio();
+            }).catch(() => {
+                console.log('🔇 Autoplay blocked - showing button');
+            });
+        });
 
         volSlider.oninput = (e) => { player.volume = e.target.value; };
     </script>
