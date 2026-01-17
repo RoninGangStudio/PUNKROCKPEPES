@@ -1056,13 +1056,6 @@
         }
 
         const commonTooltipOptions = {
-            callbacks: {
-                title: function(tooltipItems) {
-                    const item = tooltipItems[0];
-                    let label = item.chart.data.labels[item.dataIndex];
-                    if (Array.isArray(label)) { return label.join(' '); } else { return label; }
-                }
-            },
             backgroundColor: '#000000',
             titleFont: { family: 'Space Mono', size: 14 },
             bodyFont: { family: 'Space Mono', size: 12 },
@@ -1157,11 +1150,12 @@
         ];
 
         function loadTrack(file, element) {
+            player.pause();
             player.src = file;
-            player.play().catch(e => console.log("Playback failed. User interaction needed."));
+            player.load();
+            player.play().catch(e => console.log("User interaction needed."));
             trackTitle.innerText = element.innerText;
             currentTrackIndex = tracks.findIndex(t => t.file === file);
-            
             document.querySelectorAll('.track-item').forEach(el => {
                 el.classList.remove('bg-[#EAFF00]', 'text-black');
             });
@@ -1170,32 +1164,25 @@
 
         function togglePlay() {
             if (player.paused) { 
-                if(!player.src) { // Si no hay nada cargado, empezamos con la primera
+                if(!player.src) {
                     const firstTrack = document.querySelector('.track-item');
                     loadTrack(tracks[0].file, firstTrack);
-                } else {
-                    player.play(); 
-                }
-            } else { 
-                player.pause(); 
-            }
+                } else { player.play(); }
+            } else { player.pause(); }
         }
 
-        // AUTO-SKIP: Al terminar una canción, pasa a la siguiente
         player.onended = () => {
             currentTrackIndex++;
             if (currentTrackIndex < tracks.length) {
                 const nextTrackElement = document.querySelectorAll('.track-item')[currentTrackIndex];
                 loadTrack(tracks[currentTrackIndex].file, nextTrackElement);
             } else {
-                // Si llegamos al final, reiniciamos a la primera
                 currentTrackIndex = 0;
                 const firstTrackElement = document.querySelectorAll('.track-item')[0];
                 loadTrack(tracks[0].file, firstTrackElement);
             }
         };
 
-        // AUTO-PLAY AL PRIMER CLIC EN LA PÁGINA
         window.addEventListener('click', () => {
             if (!player.src || player.src === "") {
                 const firstTrackElement = document.querySelectorAll('.track-item')[0];
