@@ -446,6 +446,7 @@
         .focus\:border-\[\#FF00FF\]:focus { border-color: #FF00FF; }
         .hover\:bg-white:hover { background-color: #ffffff; }
         .cursor-not-allowed { cursor: not-allowed; }
+        .cursor-text { cursor: text; }
         .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         .animate-bounce { animation: bounce 1s infinite; }
 
@@ -837,7 +838,7 @@
 
             <div class="neo-box bg-white overflow-hidden border-4 border-black shadow-[8px_8px_0px_#EAFF00]">
                 <div class="bg-black p-3 border-b-4 border-black flex justify-between items-center">
-                    <span class="text-white font-mono font-bold text-sm animate-pulse">● NOW PLAYING: <span id="current-track-title">SELECT A TRACK</span></span>
+                    <span class="text-white font-mono font-bold text-sm animate-pulse">● NOW PLAYING: <span id="current-track-title">CLICK TO START THE CHAOS</span></span>
                     <div class="flex gap-2">
                         <div class="w-4 h-4 bg-[#FF00FF] border-2 border-white"></div>
                         <div class="w-4 h-4 bg-[#00FFFF] border-2 border-white"></div>
@@ -845,7 +846,7 @@
                 </div>
 
                 <div class="p-6 bg-white">
-                    <audio id="main-audio" src=""></audio>
+                    <audio id="main-audio" preload="auto" crossorigin="anonymous"></audio>
                     
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="flex flex-wrap gap-4 items-center">
@@ -859,22 +860,22 @@
 
                         <div class="flex-grow">
                             <div class="border-2 border-black bg-gray-100 p-2 max-h-64 overflow-y-auto font-mono text-sm">
-                                <div onclick="loadTrack('1-We Are The Punk Rock Pepes.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
-                                <div onclick="loadTrack('2-PRP Bop.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
-                                <div onclick="loadTrack('3-CLARITY.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
-                                <div onclick="loadTrack('4-Set The World On Fire.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
-                                <div onclick="loadTrack('5-She_s For The Community_V2.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
-                                <div onclick="loadTrack('6-Wreck The Charts.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
-                                <div onclick="loadTrack('7-Ain_t No Chill Frog.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
-                                <div onclick="loadTrack('8-Wake The Chain.mp3', this)" class="p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
-                                <div onclick="loadTrack('9-We Are The Punk Rock Pepes_V2.mp3', this)" class="p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
+                                <div onclick="loadTrack('PRPANTHEM1.wav', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
+                                <div onclick="loadTrack('PRPANTHEM2.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
+                                <div onclick="loadTrack('PRPANTHEM3.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
+                                <div onclick="loadTrack('PRPANTHEM4.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
+                                <div onclick="loadTrack('PRPANTHEM5.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
+                                <div onclick="loadTrack('PRPANTHEM6.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
+                                <div onclick="loadTrack('PRPANTHEM7.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
+                                <div onclick="loadTrack('PRPANTHEM8.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
+                                <div onclick="loadTrack('PRPANTHEM9.wav', this)" class="track-item p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-gray-200 p-2 border-t-2 border-black text-[10px] font-bold text-center">
-                    PUNK_AUDIO_ENGINE_V1.0 // NO ROYALTIES // JUST NOISE
+                <div class="bg-gray-200 p-2 border-t-2 border-black text-[10px] font-bold text-center uppercase">
+                    PUNK_AUDIO_ENGINE_V2.0 // AUTO-SKIP ACTIVE // NO ROYALTIES
                 </div>
             </div>
         </section>
@@ -899,6 +900,7 @@
             navigator.clipboard.writeText(caInput.value).then(() => {
                 feedback.classList.remove('hidden');
                 caBox.classList.add('flash-cyan');
+                
                 setTimeout(() => {
                     feedback.classList.add('hidden');
                     caBox.classList.remove('flash-cyan');
@@ -1005,6 +1007,7 @@
             const memeText = document.getElementById('meme-final-text');
             const shareControls = document.getElementById('share-controls');
             shareControls.classList.add('hidden');
+            shareControls.classList.remove('flex');
             imageArea.classList.remove('hidden');
             loader.classList.remove('hidden');
             visual.classList.add('hidden');
@@ -1014,6 +1017,8 @@
                 visual.classList.remove('hidden');
                 const randomImg = newsImages[Math.floor(Math.random() * newsImages.length)];
                 visual.style.backgroundImage = `url('${randomImg}')`;
+                visual.style.backgroundSize = 'cover';
+                visual.style.backgroundPosition = 'center';
                 memeText.innerHTML = currentHeadline; 
                 imageArea.classList.add('flash-yellow');
                 setTimeout(() => imageArea.classList.remove('flash-yellow'), 200);
@@ -1051,6 +1056,13 @@
         }
 
         const commonTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) { return label.join(' '); } else { return label; }
+                }
+            },
             backgroundColor: '#000000',
             titleFont: { family: 'Space Mono', size: 14 },
             bodyFont: { family: 'Space Mono', size: 12 },
@@ -1126,25 +1138,70 @@
             }
         });
 
-        // AUDIO PLAYER LOGIC
+        // --- AUDIO ENGINE LOGIC ---
         const player = document.getElementById('main-audio');
-        const playBtn = document.getElementById('play-btn');
         const trackTitle = document.getElementById('current-track-title');
         const volSlider = document.getElementById('volume-slider');
+        let currentTrackIndex = -1;
+
+        const tracks = [
+            { file: 'PRPANTHEM1.wav', title: '01. We Are The Punk Rock Pepes' },
+            { file: 'PRPANTHEM2.mp3', title: '02. PRP Bop' },
+            { file: 'PRPANTHEM3.mp3', title: '03. CLARITY' },
+            { file: 'PRPANTHEM4.mp3', title: '04. Set The World On Fire' },
+            { file: 'PRPANTHEM5.mp3', title: '05. She_s For The Community_V2' },
+            { file: 'PRPANTHEM6.mp3', title: '06. Wreck The Charts' },
+            { file: 'PRPANTHEM7.mp3', title: '07. Ain_t No Chill Frog' },
+            { file: 'PRPANTHEM8.mp3', title: '08. Wake The Chain' },
+            { file: 'PRPANTHEM9.wav', title: '09. We Are The Punk Rock Pepes_V2' }
+        ];
 
         function loadTrack(file, element) {
             player.src = file;
-            player.play();
+            player.play().catch(e => console.log("Playback failed. User interaction needed."));
             trackTitle.innerText = element.innerText;
-            document.querySelectorAll('#punk-player-section div.cursor-pointer').forEach(el => {
+            currentTrackIndex = tracks.findIndex(t => t.file === file);
+            
+            document.querySelectorAll('.track-item').forEach(el => {
                 el.classList.remove('bg-[#EAFF00]', 'text-black');
             });
             element.classList.add('bg-[#EAFF00]', 'text-black');
         }
 
         function togglePlay() {
-            if (player.paused) { player.play(); } else { player.pause(); }
+            if (player.paused) { 
+                if(!player.src) { // Si no hay nada cargado, empezamos con la primera
+                    const firstTrack = document.querySelector('.track-item');
+                    loadTrack(tracks[0].file, firstTrack);
+                } else {
+                    player.play(); 
+                }
+            } else { 
+                player.pause(); 
+            }
         }
+
+        // AUTO-SKIP: Al terminar una canción, pasa a la siguiente
+        player.onended = () => {
+            currentTrackIndex++;
+            if (currentTrackIndex < tracks.length) {
+                const nextTrackElement = document.querySelectorAll('.track-item')[currentTrackIndex];
+                loadTrack(tracks[currentTrackIndex].file, nextTrackElement);
+            } else {
+                // Si llegamos al final, reiniciamos a la primera
+                currentTrackIndex = 0;
+                const firstTrackElement = document.querySelectorAll('.track-item')[0];
+                loadTrack(tracks[0].file, firstTrackElement);
+            }
+        };
+
+        // AUTO-PLAY AL PRIMER CLIC EN LA PÁGINA
+        window.addEventListener('click', () => {
+            if (!player.src || player.src === "") {
+                const firstTrackElement = document.querySelectorAll('.track-item')[0];
+                loadTrack(tracks[0].file, firstTrackElement);
+            }
+        }, { once: true });
 
         volSlider.oninput = (e) => { player.volume = e.target.value; };
     </script>
