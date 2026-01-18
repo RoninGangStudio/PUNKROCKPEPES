@@ -891,40 +891,98 @@
             }, 500);
         }
 
-        // CHARTS - RESTAURADOS (Original Logic)
+       // --- CHARTS: NUEVO DISEÑO PUNK ---
+        
+        // Configuración Global de Fuentes
+        Chart.defaults.font.family = "'Space Mono', monospace";
+        Chart.defaults.color = '#000';
+        Chart.defaults.borderColor = '#000';
+
+        // 1. TOKENOMICS (Polar Area - Estilo Radar)
         const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
         new Chart(ctxToken, { 
-            type: 'doughnut', 
+            type: 'polarArea', // Cambiado de Doughnut a PolarArea para más impacto
             data: { 
-                labels: ['Community', 'Team', 'VCs'], 
+                labels: ['Community', 'Team', 'Marketing', 'Treasury'], 
                 datasets: [{ 
-                    data: [100, 0, 0], 
-                    backgroundColor: ['#EAFF00', '#000', '#888'], 
-                    borderWidth: 3 
+                    data: [85, 5, 5, 5], // Datos de ejemplo
+                    backgroundColor: [
+                        '#EAFF00', // Amarillo Neón (Comunidad)
+                        '#000000', // Negro (Team)
+                        '#FF00FF', // Rosa (Marketing)
+                        '#00FFFF'  // Cyan (Treasury)
+                    ],
+                    borderWidth: 3,
+                    borderColor: '#000000'
                 }] 
             }, 
             options: { 
                 responsive: true, 
-                maintainAspectRatio: false 
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        ticks: { display: false }, // Ocultar números del radar
+                        grid: {
+                            color: '#e5e5e5',
+                            lineWidth: 2,
+                            borderDash: [5, 5] // Líneas punteadas
+                        },
+                        pointLabels: {
+                            display: true,
+                            centerPointLabels: true,
+                            font: { size: 12, weight: 'bold' }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false } // Usamos nuestra propia leyenda HTML
+                }
             } 
         });
 
+        // 2. VOLATILITY (Stepped Line - Estilo Retro Digital)
         const ctxVol = document.getElementById('volatilityChart').getContext('2d');
         new Chart(ctxVol, { 
             type: 'line', 
             data: { 
-                labels: ['L', 'D1', 'D3', 'W1'], 
+                labels: ['Launch', 'Hour 1', 'Hour 6', 'Day 1', 'Day 3', 'Week 1'], 
                 datasets: [{ 
-                    label: 'Punk Pepes', 
-                    data: [10, 40, 25, 65], 
-                    borderColor: '#FF00FF', 
-                    borderWidth: 3, 
-                    fill: true 
+                    label: 'PRICE ACTION', 
+                    data: [10, 45, 30, 85, 60, 100], // Datos simulados
+                    borderColor: '#00FFFF', // Cyan eléctrico
+                    backgroundColor: 'rgba(255, 0, 255, 0.2)', // Relleno Rosa transparente
+                    borderWidth: 4, 
+                    fill: true,
+                    stepped: true, // ¡ESTO HACE LA MAGIA PIXELADA!
+                    pointBackgroundColor: '#EAFF00',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 10
                 }] 
             }, 
             options: { 
                 responsive: true, 
-                maintainAspectRatio: false 
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#333' }, // Rejilla oscura
+                        ticks: { color: '#fff' }
+                    },
+                    y: {
+                        grid: { color: '#333', borderDash: [5, 5] },
+                        ticks: { display: false } // Ocultar precios, solo visual
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff', font: { size: 14 } }
+                    }
+                }
             } 
         });
     </script>
