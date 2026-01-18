@@ -844,9 +844,9 @@
                     
                     <div class="flex flex-col md:flex-row gap-6">
                         <div class="flex flex-wrap gap-4 items-center">
-                            <button onclick="togglePlay()" id="play-btn" class="neo-btn bg-[#FF00FF] text-white py-4 px-8 text-xl border-2 border-black">▶ PLAY / PAUSE</button>
+                            <button onclick="togglePlay()" id="play-btn" class="neo-btn bg-[#FF00FF] text-white py-4 px-8 text-xl border-2 border-black">▶ PLAY</button>
                             <div class="bg-black text-[#EAFF00] font-mono px-4 py-2 border-2 border-black">
-                                VOL: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.7" class="accent-[#EAFF00]">
+                                VOL: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1.0" class="accent-[#EAFF00]">
                             </div>
                         </div>
 
@@ -879,69 +879,23 @@
     </div>
 
     <script>
-        // COPIAR CA
-        function copyCA() {
-            const caInput = document.getElementById('ca-input');
-            const caBox = document.getElementById('ca-box');
-            caInput.select();
-            navigator.clipboard.writeText(caInput.value).then(() => {
-                caBox.classList.add('flash-cyan');
-                setTimeout(() => caBox.classList.remove('flash-cyan'), 2000);
-            });
-        }
-
-        // CHAOS GENERATOR
-        const chaosPhrases = ["Forget the whitepaper. Read the room.", "No VCs. Just chaos.", "Liquidity is burnt.", "Enter the mosh pit."];
-        function generateChaos() {
-            const btn = document.getElementById('gen-btn');
-            const display = document.getElementById('chaos-display');
-            btn.classList.add('shaking');
-            setTimeout(() => btn.classList.remove('shaking'), 500);
-            const randomIndex = Math.floor(Math.random() * chaosPhrases.length);
-            display.querySelector('p').innerText = chaosPhrases[randomIndex] + " @punkrockpepes";
-            display.classList.add('flash-yellow');
-            setTimeout(() => display.classList.remove('flash-yellow'), 200);
-        }
-
-        // NEWS LOGIC
-        function generateHeadline() {
-            const input = document.getElementById('news-input').value.trim() || "THE MARKET";
-            const display = document.getElementById('news-display');
-            display.innerHTML = `BREAKING: <span class="text-[#FF00FF]">${input}</span> DECLARED PUNK BY PEPES.`;
-            document.getElementById('btn-img-gen').disabled = false;
-        }
-
-        function generateNewsImage() {
-            const imageArea = document.getElementById('image-result-area');
-            const visual = document.getElementById('generated-visual');
-            const memeText = document.getElementById('meme-final-text');
-            imageArea.classList.remove('hidden');
-            setTimeout(() => {
-                visual.classList.remove('hidden');
-                visual.style.backgroundImage = `url('https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(1).png')`;
-                memeText.innerText = document.getElementById('news-display').innerText;
-            }, 500);
-        }
-
-        // CHARTS
-        const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
-        new Chart(ctxToken, { type: 'doughnut', data: { labels: ['Community', 'Team', 'VCs'], datasets: [{ data: [100, 0, 0], backgroundColor: ['#EAFF00', '#000', '#888'], borderWidth: 3 }] }, options: { responsive: true, maintainAspectRatio: false } });
-
-        const ctxVol = document.getElementById('volatilityChart').getContext('2d');
-        new Chart(ctxVol, { type: 'line', data: { labels: ['L', 'D1', 'D3', 'W1'], datasets: [{ label: 'Punk Pepes', data: [10, 40, 25, 65], borderColor: '#FF00FF', borderWidth: 3, fill: true }] }, options: { responsive: true, maintainAspectRatio: false } });
-
-        // AUDIO ENGINE - FIXED VERSION
+        // --- CONFIGURACIÓN BÁSICA ---
+        // Usamos CDN para evitar problemas de "Text file" de GitHub
+        const baseURL = "https://cdn.jsdelivr.net/gh/RoninGangStudio/PUNKROCKPEPES@main/";
+        
+        // Elementos del DOM
         const player = document.getElementById('main-audio');
         const trackTitle = document.getElementById('current-track-title');
         const volSlider = document.getElementById('volume-slider');
         const audioActivator = document.getElementById('audio-activator');
         const playerControls = document.getElementById('player-controls');
+        const caInput = document.getElementById('ca-input');
+        const caBox = document.getElementById('ca-box');
+        
         let currentTrackIndex = 0;
         let audioInitialized = false;
 
-        // RUTA CDN FUNCIONAL (jsDelivr)
-        const baseURL = "https://cdn.jsdelivr.net/gh/RoninGangStudio/PUNKROCKPEPES@main/";
-
+        // Lista de canciones
         const tracks = [
             { file: baseURL + 'prpanthem1.mp3', title: '01. We Are The Punk Rock Pepes' },
             { file: baseURL + 'prpanthem2.mp3', title: '02. PRP Bop' },
@@ -954,84 +908,126 @@
             { file: baseURL + 'prpanthem9.mp3', title: '09. We Are The Punk Rock Pepes_V2' }
         ];
 
+        // --- FUNCIONES DEL REPRODUCTOR ---
+
+        // 1. INICIAR (Se llama solo al pulsar el botón gigante)
         function initAudio() {
             if (audioInitialized) return;
             audioInitialized = true;
             
-            // EL FIX IMPORTANTE: FORZAR UNMUTE AL HACER CLICK
-            player.muted = false; 
-
+            // Ocultar botón gigante, mostrar controles
             audioActivator.style.display = 'none';
             playerControls.style.display = 'block';
+
+            // Configuración crítica para que suene
+            player.volume = 1.0; // Volumen al máximo por defecto
+            volSlider.value = 1.0;
+            player.muted = false; // Asegurar que NO está en silencio
+            
+            // Cargar y reproducir la primera canción
             loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
         }
 
+        // 2. CARGAR PISTA
         function loadTrack(file, element) {
-            player.pause();
+            // Reset visual
+            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('bg-[#EAFF00]', 'text-black'));
+            if (element) element.classList.add('bg-[#EAFF00]', 'text-black');
+            else if (currentTrackIndex === 0) document.querySelectorAll('.track-item')[0].classList.add('bg-[#EAFF00]', 'text-black');
+
+            // Actualizar título
+            const trackObj = tracks.find(t => t.file === file) || tracks[0];
+            trackTitle.innerText = "LOADING: " + trackObj.title;
+
+            // Lógica de Audio
             player.src = file;
             player.load();
-            player.volume = volSlider.value;
-            // Asegurar que no esté mudo al cargar nuevo track
-            player.muted = false; 
             
-            player.onerror = () => {
-                console.error('❌ Error loading:', file);
-                trackTitle.innerText = "ERROR: Check audio file paths";
-                setTimeout(() => {
-                    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-                    if (currentTrackIndex < tracks.length) {
-                        loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
-                    }
-                }, 2000);
-            };
-            
-            player.play().then(() => {
-                trackTitle.innerText = element ? element.innerText : tracks[currentTrackIndex].title;
-                console.log('▶ Playing:', file);
-            }).catch(e => {
-                console.error('⚠ Playback error:', e);
-                trackTitle.innerText = "CLICK PLAY TO START";
-            });
-
-            if (element) {
-                document.querySelectorAll('.track-item').forEach(el => el.classList.remove('bg-[#EAFF00]', 'text-black'));
-                element.classList.add('bg-[#EAFF00]', 'text-black');
-                currentTrackIndex = tracks.findIndex(t => t.file === file);
-            }
+            player.play()
+                .then(() => {
+                    trackTitle.innerText = "▶ NOW PLAYING: " + trackObj.title;
+                    console.log('Audio sonando correctamente:', file);
+                })
+                .catch(error => {
+                    console.error("Error al reproducir:", error);
+                    trackTitle.innerText = "⚠️ CLICK PLAY AGAIN";
+                });
+                
+            // Actualizar índice actual
+            currentTrackIndex = tracks.findIndex(t => t.file === file);
         }
 
+        // 3. CONTROLES
         function togglePlay() {
-            if (!audioInitialized) {
-                initAudio();
-                return;
+            if (!audioInitialized) { initAudio(); return; }
+            if (player.paused) { 
+                player.play(); 
+                document.getElementById('play-btn').innerText = "⏸ PAUSE";
+            } else { 
+                player.pause(); 
+                document.getElementById('play-btn').innerText = "▶ PLAY";
             }
-            if (player.paused) { player.play(); } else { player.pause(); }
         }
 
+        // Siguiente canción automática
         player.onended = () => {
             currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-            loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
+            const nextTrack = tracks[currentTrackIndex];
+            const nextElement = document.querySelectorAll('.track-item')[currentTrackIndex];
+            loadTrack(nextTrack.file, nextElement);
         };
 
-        // INTENTO DE AUTOPLAY AL CARGAR (CON MUTE PARA INTENTAR EVITAR BLOQUEO)
-        window.addEventListener('load', () => {
-            player.src = tracks[0].file;
-            player.volume = 0.5;
-            player.muted = true;
-            player.play().then(() => {
-                // Si entra aquí, el navegador permitió el autoplay (raro, pero posible si está muteado)
-                player.muted = false; 
-                player.volume = 0.7;
-                console.log('🎸 Autoplay successful!');
-                initAudio();
-            }).catch(() => {
-                // Si entra aquí, el navegador bloqueó el autoplay. 
-                // IMPORTANTE: El player se queda muteado (true) hasta que el usuario pulse el botón.
-                console.log('🔇 Autoplay blocked - showing button');
-            });
-        });
+        // Slider de volumen
+        volSlider.oninput = (e) => { 
+            player.volume = e.target.value; 
+            console.log("Volumen cambiado a:", e.target.value);
+        };
 
-        volSlider.oninput = (e) => { player.volume = e.target.value; };
+        // --- OTRAS FUNCIONES (Copia, Chaos, News) ---
+        
+        function copyCA() {
+            caInput.select();
+            navigator.clipboard.writeText(caInput.value).then(() => {
+                caBox.classList.add('flash-cyan');
+                setTimeout(() => caBox.classList.remove('flash-cyan'), 2000);
+            });
+        }
+
+        const chaosPhrases = ["Forget the whitepaper.", "No VCs. Just chaos.", "Liquidity burnt.", "Mosh pit ready."];
+        function generateChaos() {
+            const btn = document.getElementById('gen-btn');
+            const display = document.getElementById('chaos-display');
+            btn.classList.add('shaking');
+            setTimeout(() => btn.classList.remove('shaking'), 500);
+            display.querySelector('p').innerText = chaosPhrases[Math.floor(Math.random() * chaosPhrases.length)];
+            display.classList.add('flash-yellow');
+            setTimeout(() => display.classList.remove('flash-yellow'), 200);
+        }
+
+        function generateHeadline() {
+            const input = document.getElementById('news-input').value.trim() || "THE MARKET";
+            document.getElementById('news-display').innerHTML = `BREAKING: <span class="text-[#FF00FF]">${input}</span> IS PUNK.`;
+            document.getElementById('btn-img-gen').disabled = false;
+        }
+
+        function generateNewsImage() {
+            document.getElementById('image-result-area').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('generated-visual').classList.remove('hidden');
+                document.getElementById('generated-visual').style.backgroundImage = `url('https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(1).png')`;
+                document.getElementById('meme-final-text').innerText = document.getElementById('news-display').innerText;
+            }, 500);
+        }
+
+        // Gráficos (Charts)
+        try {
+            const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
+            new Chart(ctxToken, { type: 'doughnut', data: { labels: ['Community', 'Team'], datasets: [{ data: [100, 0], backgroundColor: ['#EAFF00', '#000'] }] } });
+            
+            const ctxVol = document.getElementById('volatilityChart').getContext('2d');
+            new Chart(ctxVol, { type: 'line', data: { labels: ['L', 'D1', 'W1'], datasets: [{ label: 'Punk', data: [10, 80, 45], borderColor: '#FF00FF' }] } });
+        } catch(e) { console.log("Charts skipping..."); }
+
     </script>
 </body>
 </html>
