@@ -823,51 +823,8 @@
                 <h2 class="text-3xl font-bold uppercase bg-black text-white inline-block px-4 py-2 transform rotate-1">05. THE SOUNDTRACK</h2>
             </div>
 
-            <div class="neo-box bg-white overflow-hidden border-4 border-black shadow-[8px_8px_0px_#EAFF00]">
-                <div class="bg-black p-3 border-b-4 border-black flex justify-between items-center">
-                    <span class="text-white font-mono font-bold text-sm animate-pulse">● NOW PLAYING: <span id="current-track-title">LOADING...</span></span>
-                    <div class="flex gap-2">
-                        <div class="w-4 h-4 bg-[#FF00FF] border-2 border-white"></div>
-                        <div class="w-4 h-4 bg-[#00FFFF] border-2 border-white"></div>
-                    </div>
-                </div>
-
-                <div id="audio-activator" class="p-8 bg-gradient-to-br from-[#FF00FF] to-[#00FFFF] text-center">
-                    <button onclick="initAudio()" class="neo-btn bg-black text-[#EAFF00] text-3xl py-6 px-12 border-4 border-white shadow-[8px_8px_0px_#000] animate-pulse" style="animation: pulse 1.5s infinite;">
-                        🔊 UNLEASH THE CHAOS
-                    </button>
-                    <p class="text-white font-bold mt-4 text-sm">Click to start the Punk Rock Pepes experience</p>
-                </div>
-
-                <div class="p-6 bg-white" id="player-controls" style="display: none;">
-                    <audio id="main-audio" preload="auto"></audio>
-                    
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="flex flex-wrap gap-4 items-center">
-                            <button onclick="togglePlay()" id="play-btn" class="neo-btn bg-[#FF00FF] text-white py-4 px-8 text-xl border-2 border-black">▶ PLAY</button>
-                            <div class="bg-black text-[#EAFF00] font-mono px-4 py-2 border-2 border-black">
-                                VOL: <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1.0" class="accent-[#EAFF00]">
-                            </div>
-                        </div>
-
-                        <div class="flex-grow">
-                           <div class="flex-grow">
-                            <div class="border-2 border-black bg-gray-100 p-2 max-h-64 overflow-y-auto font-mono text-sm">
-                                <div onclick="loadTrack(baseURL + 'prpanthem1.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem2.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem3.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem4.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem5.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem6.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem7.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem8.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
-                                <div onclick="loadTrack(baseURL + 'prpanthem9.mp3', this)" class="track-item p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-200 p-2 border-t-2 border-black text-[10px] font-bold text-center uppercase">PUNK_AUDIO_ENGINE_V3.0 // AUTO-PLAY READY // NO ROYALTIES</div>
+            <div class="neo-box bg-white overflow-hidden border-4 border-black shadow-[8px_8px_0px_#EAFF00] p-4">
+                <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2176573031&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/punkrockpepes-solana" title="Punk Rock Pepes" target="_blank" style="color: #cccccc; text-decoration: none;">Punk Rock Pepes</a> · <a href="https://soundcloud.com/punkrockpepes-solana/sets/punk-rock-pepes-solana-1" title="PUNK ROCK PEPES SOLANA  #1" target="_blank" style="color: #cccccc; text-decoration: none;">PUNK ROCK PEPES SOLANA  #1</a></div>
             </div>
         </section>
 
@@ -923,7 +880,7 @@
             }, 500);
         }
 
-        // CHARTS - RESTAURADOS (Original Logic)
+        // CHARTS - RESTAURADOS Y ORIGINALES (NO TOCAR)
         const ctxToken = document.getElementById('tokenomicsChart').getContext('2d');
         new Chart(ctxToken, { 
             type: 'doughnut', 
@@ -960,103 +917,7 @@
             } 
         });
 
-        // AUDIO ENGINE - FIXED VERSION
-        // 1. Usa CDN de jsDelivr para evitar errores de tipo MIME.
-        // 2. No usa autoplay para evitar bloqueo del navegador.
-        // 3. Fuerza el volumen al máximo al iniciar.
-        
-        const player = document.getElementById('main-audio');
-        const trackTitle = document.getElementById('current-track-title');
-        const volSlider = document.getElementById('volume-slider');
-        const audioActivator = document.getElementById('audio-activator');
-        const playerControls = document.getElementById('player-controls');
-        let currentTrackIndex = 0;
-        let audioInitialized = false;
-
-        const baseURL = "https://cdn.jsdelivr.net/gh/RoninGangStudio/PUNKROCKPEPES@main/";
-
-        const tracks = [
-            { file: baseURL + 'prpanthem1.mp3', title: '01. We Are The Punk Rock Pepes' },
-            { file: baseURL + 'prpanthem2.mp3', title: '02. PRP Bop' },
-            { file: baseURL + 'prpanthem3.mp3', title: '03. CLARITY' },
-            { file: baseURL + 'prpanthem4.mp3', title: '04. Set The World On Fire' },
-            { file: baseURL + 'prpanthem5.mp3', title: '05. She_s For The Community_V2' },
-            { file: baseURL + 'prpanthem6.mp3', title: '06. Wreck The Charts' },
-            { file: baseURL + 'prpanthem7.mp3', title: '07. Ain_t No Chill Frog' },
-            { file: baseURL + 'prpanthem8.mp3', title: '08. Wake The Chain' },
-            { file: baseURL + 'prpanthem9.mp3', title: '09. We Are The Punk Rock Pepes_V2' }
-        ];
-
-        function initAudio() {
-            if (audioInitialized) return;
-            audioInitialized = true;
-            
-            // UI
-            audioActivator.style.display = 'none';
-            playerControls.style.display = 'block';
-            
-            // FORZAR SONIDO
-            player.volume = 1.0;
-            volSlider.value = 1.0;
-            player.muted = false;
-
-            loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
-        }
-
-        function loadTrack(file, element) {
-            player.pause();
-            player.src = file;
-            player.load();
-            
-            // Asegurar que no esté mudo
-            player.muted = false; 
-            
-            player.onerror = () => {
-                console.error('❌ Error loading:', file);
-                trackTitle.innerText = "ERROR: Check audio file paths";
-                setTimeout(() => {
-                    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-                    if (currentTrackIndex < tracks.length) {
-                        loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
-                    }
-                }, 2000);
-            };
-            
-            player.play().then(() => {
-                trackTitle.innerText = element ? element.innerText : tracks[currentTrackIndex].title;
-                console.log('▶ Playing:', file);
-            }).catch(e => {
-                console.error('⚠ Playback error:', e);
-                trackTitle.innerText = "CLICK PLAY TO START";
-            });
-
-            if (element) {
-                document.querySelectorAll('.track-item').forEach(el => el.classList.remove('bg-[#EAFF00]', 'text-black'));
-                element.classList.add('bg-[#EAFF00]', 'text-black');
-                currentTrackIndex = tracks.findIndex(t => t.file === file);
-            }
-        }
-
-        function togglePlay() {
-            if (!audioInitialized) {
-                initAudio();
-                return;
-            }
-            if (player.paused) { 
-                player.play(); 
-                document.getElementById('play-btn').innerText = "⏸ PAUSE";
-            } else { 
-                player.pause(); 
-                document.getElementById('play-btn').innerText = "▶ PLAY";
-            }
-        }
-
-        player.onended = () => {
-            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-            loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
-        };
-
-        volSlider.oninput = (e) => { player.volume = e.target.value; };
+        // NOTA: SE ELIMINÓ TODO EL JAVASCRIPT DEL REPRODUCTOR MP3 PORQUE AHORA SE USA SOUNDCLOUD IFRAME
     </script>
 </body>
 </html>
