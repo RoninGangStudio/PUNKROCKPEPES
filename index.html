@@ -939,7 +939,7 @@
         let currentTrackIndex = 0;
         let audioInitialized = false;
 
-        // MODIFICADO: RUTA BASE DIRECTA A TU GITHUB PARA QUE FUNCIONE SIEMPRE
+        // RUTA CDN FUNCIONAL (jsDelivr)
         const baseURL = "https://cdn.jsdelivr.net/gh/RoninGangStudio/PUNKROCKPEPES@main/";
 
         const tracks = [
@@ -957,6 +957,10 @@
         function initAudio() {
             if (audioInitialized) return;
             audioInitialized = true;
+            
+            // EL FIX IMPORTANTE: FORZAR UNMUTE AL HACER CLICK
+            player.muted = false; 
+
             audioActivator.style.display = 'none';
             playerControls.style.display = 'block';
             loadTrack(tracks[0].file, document.querySelectorAll('.track-item')[0]);
@@ -967,12 +971,12 @@
             player.src = file;
             player.load();
             player.volume = volSlider.value;
+            // Asegurar que no esté mudo al cargar nuevo track
+            player.muted = false; 
             
-            // Manejar errores de carga
             player.onerror = () => {
                 console.error('❌ Error loading:', file);
                 trackTitle.innerText = "ERROR: Check audio file paths";
-                // Intentar con el siguiente track
                 setTimeout(() => {
                     currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
                     if (currentTrackIndex < tracks.length) {
@@ -982,7 +986,6 @@
             };
             
             player.play().then(() => {
-                // Si 'element' es un objeto HTML (div), usa innerText. Si es undefined, usa tracks[index].title
                 trackTitle.innerText = element ? element.innerText : tracks[currentTrackIndex].title;
                 console.log('▶ Playing:', file);
             }).catch(e => {
@@ -1010,17 +1013,20 @@
             loadTrack(tracks[currentTrackIndex].file, document.querySelectorAll('.track-item')[currentTrackIndex]);
         };
 
-        // INTENTO DE AUTOPLAY AL CARGAR
+        // INTENTO DE AUTOPLAY AL CARGAR (CON MUTE PARA INTENTAR EVITAR BLOQUEO)
         window.addEventListener('load', () => {
             player.src = tracks[0].file;
             player.volume = 0.5;
             player.muted = true;
             player.play().then(() => {
-                player.muted = false;
+                // Si entra aquí, el navegador permitió el autoplay (raro, pero posible si está muteado)
+                player.muted = false; 
                 player.volume = 0.7;
                 console.log('🎸 Autoplay successful!');
                 initAudio();
             }).catch(() => {
+                // Si entra aquí, el navegador bloqueó el autoplay. 
+                // IMPORTANTE: El player se queda muteado (true) hasta que el usuario pulse el botón.
                 console.log('🔇 Autoplay blocked - showing button');
             });
         });
