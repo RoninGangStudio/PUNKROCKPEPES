@@ -853,15 +853,15 @@
                         <div class="flex-grow">
                            <div class="flex-grow">
                             <div class="border-2 border-black bg-gray-100 p-2 max-h-64 overflow-y-auto font-mono text-sm">
-                                <div onclick="loadTrack('prpanthem1.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
-                                <div onclick="loadTrack('prpanthem2.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
-                                <div onclick="loadTrack('prpanthem3.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
-                                <div onclick="loadTrack('prpanthem4.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
-                                <div onclick="loadTrack('prpanthem5.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
-                                <div onclick="loadTrack('prpanthem6.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
-                                <div onclick="loadTrack('prpanthem7.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
-                                <div onclick="loadTrack('prpanthem8.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
-                                <div onclick="loadTrack('prpanthem9.mp3', this)" class="track-item p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem1.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">01. We Are The Punk Rock Pepes</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem2.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">02. PRP Bop</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem3.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">03. CLARITY</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem4.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">04. Set The World On Fire</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem5.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">05. She_s For The Community_V2</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem6.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">06. Wreck The Charts</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem7.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">07. Ain_t No Chill Frog</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem8.mp3', this)" class="track-item p-2 border-b border-black cursor-pointer hover:bg-[#00FFFF] transition-colors">08. Wake The Chain</div>
+                                <div onclick="loadTrack(baseURL + 'prpanthem9.mp3', this)" class="track-item p-2 cursor-pointer hover:bg-[#00FFFF] transition-colors">09. We Are The Punk Rock Pepes_V2</div>
                             </div>
                         </div>
                         </div>
@@ -930,7 +930,7 @@
         const ctxVol = document.getElementById('volatilityChart').getContext('2d');
         new Chart(ctxVol, { type: 'line', data: { labels: ['L', 'D1', 'D3', 'W1'], datasets: [{ label: 'Punk Pepes', data: [10, 40, 25, 65], borderColor: '#FF00FF', borderWidth: 3, fill: true }] }, options: { responsive: true, maintainAspectRatio: false } });
 
-        // AUDIO ENGINE - AUTOPLAY AGRESIVO
+        // AUDIO ENGINE - FIXED VERSION
         const player = document.getElementById('main-audio');
         const trackTitle = document.getElementById('current-track-title');
         const volSlider = document.getElementById('volume-slider');
@@ -939,17 +939,19 @@
         let currentTrackIndex = 0;
         let audioInitialized = false;
 
-// LISTA EN MINÚSCULAS PARA EVITAR ERROR 404
+        // MODIFICADO: RUTA BASE DIRECTA A TU GITHUB PARA QUE FUNCIONE SIEMPRE
+        const baseURL = "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/";
+
         const tracks = [
-            { file: 'prpanthem1.mp3', title: '01. We Are The Punk Rock Pepes' },
-            { file: 'prpanthem2.mp3', title: '02. PRP Bop' },
-            { file: 'prpanthem3.mp3', title: '03. CLARITY' },
-            { file: 'prpanthem4.mp3', title: '04. Set The World On Fire' },
-            { file: 'prpanthem5.mp3', title: '05. She_s For The Community_V2' },
-            { file: 'prpanthem6.mp3', title: '06. Wreck The Charts' },
-            { file: 'prpanthem7.mp3', title: '07. Ain_t No Chill Frog' },
-            { file: 'prpanthem8.mp3', title: '08. Wake The Chain' },
-            { file: 'prpanthem9.mp3', title: '09. We Are The Punk Rock Pepes_V2' }
+            { file: baseURL + 'prpanthem1.mp3', title: '01. We Are The Punk Rock Pepes' },
+            { file: baseURL + 'prpanthem2.mp3', title: '02. PRP Bop' },
+            { file: baseURL + 'prpanthem3.mp3', title: '03. CLARITY' },
+            { file: baseURL + 'prpanthem4.mp3', title: '04. Set The World On Fire' },
+            { file: baseURL + 'prpanthem5.mp3', title: '05. She_s For The Community_V2' },
+            { file: baseURL + 'prpanthem6.mp3', title: '06. Wreck The Charts' },
+            { file: baseURL + 'prpanthem7.mp3', title: '07. Ain_t No Chill Frog' },
+            { file: baseURL + 'prpanthem8.mp3', title: '08. Wake The Chain' },
+            { file: baseURL + 'prpanthem9.mp3', title: '09. We Are The Punk Rock Pepes_V2' }
         ];
 
         function initAudio() {
@@ -980,6 +982,7 @@
             };
             
             player.play().then(() => {
+                // Si 'element' es un objeto HTML (div), usa innerText. Si es undefined, usa tracks[index].title
                 trackTitle.innerText = element ? element.innerText : tracks[currentTrackIndex].title;
                 console.log('▶ Playing:', file);
             }).catch(e => {
