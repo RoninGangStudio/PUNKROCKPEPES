@@ -353,14 +353,67 @@
             });
         }
 
-        // CHAOS GENERATOR (Simple Phrases)
-        const chaosPhrases = ["Forget the whitepaper. Read the room.", "No VCs. Just chaos.", "Liquidity is burnt.", "Enter the mosh pit."];
+        // CHAOS GENERATOR (50 PHRASES ADDED)
+        const chaosPhrases = [
+            "Forget the whitepaper. Read the room.",
+            "No VCs. Just chaos.",
+            "Liquidity is burnt.",
+            "Enter the mosh pit.",
+            "Buy high, sell never.",
+            "Sleep is for the poor.",
+            "The chart only goes right.",
+            "Rug pulls build character (but we don't rug).",
+            "We are the liquidity.",
+            "Solana is the new standard.",
+            "Gas fees are for boomers.",
+            "No roadmap, only vibes.",
+            "Utility is a myth constructed by suits.",
+            "Fade the Jeets.",
+            "Diamond hands or no hands.",
+            "NGMI if you sell.",
+            "Chaos is the only utility.",
+            "Burn the supply, feed the fire.",
+            "Not financial advice, just financial ruin.",
+            "Wendy's application: Ready.",
+            "Exit liquidity? Never heard of her.",
+            "1 SOL = 1 SOL.",
+            "Pure degen energy only.",
+            "The dev is asleep, post memes.",
+            "Community takeover is imminent.",
+            "Pump.fun is the arena.",
+            "Raydium is the promised land.",
+            "Taxes are theft. DeFI is freedom.",
+            "Anarchy on the blockchain.",
+            "Pepe is eternal, prices are temporary.",
+            "Punk is not dead, it's just tokenized.",
+            "Don't trust, just ape.",
+            "Due diligence is for cowards.",
+            "Green candles only.",
+            "Red candles are just flash sales.",
+            "FOMO is a hell of a drug.",
+            "Coping mechanism activated.",
+            "Bagholder supreme status unlocked.",
+            "Moon or dust. No in-between.",
+            "Send it to Valhalla.",
+            "Zero or Hero.",
+            "Leverage is a dangerous game.",
+            "Bear market resistant (we hope).",
+            "Bull market ready.",
+            "Your wife's boyfriend bought the dip.",
+            "Your bank account is trembling.",
+            "Gary can't read this smart contract.",
+            "Decentralized chaos.",
+            "Minting pure stupidity.",
+            "The floor is lava."
+        ];
+
         function generateChaos() {
             const btn = document.getElementById('gen-btn');
             const display = document.getElementById('chaos-display');
             btn.classList.add('shaking');
             setTimeout(() => btn.classList.remove('shaking'), 500);
             const randomIndex = Math.floor(Math.random() * chaosPhrases.length);
+            // This appends the required tag
             display.querySelector('p').innerText = chaosPhrases[randomIndex] + " @punkrockpepes";
             display.classList.add('flash-yellow');
             setTimeout(() => display.classList.remove('flash-yellow'), 200);
