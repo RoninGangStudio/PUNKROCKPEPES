@@ -437,6 +437,23 @@
             document.getElementById('btn-img-gen').disabled = false;
         }
 
+        // --- VISUAL GENERATOR LOGIC ---
+        // Lista ordenada de tus nuevas imágenes
+        const newsImages = [
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(1).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(2).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(3).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(4).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(5).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(6).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(7).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(8).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(9).png",
+            "https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(10).png"
+        ];
+        
+        let currentImageIndex = 0; // Para rastrear qué imagen toca (secuencial)
+
         function generateNewsImage() {
             const imageArea = document.getElementById('image-result-area');
             const visual = document.getElementById('generated-visual');
@@ -453,8 +470,17 @@
                 document.getElementById('loading-spinner').classList.add('hidden');
                 visual.classList.remove('hidden');
                 shareControls.classList.remove('hidden');
-                // IMPORTANTE: Asegúrate de que esta URL sea pública
-                visual.style.backgroundImage = `url('https://raw.githubusercontent.com/RoninGangStudio/PUNKROCKPEPES/main/fondonews%20(1).png')`;
+                
+                // Usamos la imagen actual del array según el índice
+                visual.style.backgroundImage = `url('${newsImages[currentImageIndex]}')`;
+                
+                // Avanzar al siguiente índice para la próxima vez
+                currentImageIndex++;
+                // Si llegamos al final (más de 10), volvemos a la primera (0)
+                if (currentImageIndex >= newsImages.length) {
+                    currentImageIndex = 0;
+                }
+
                 // Usamos innerText para limpiar el HTML span y solo tener texto plano en la imagen
                 memeText.innerText = document.getElementById('news-display').innerText;
             }, 800);
